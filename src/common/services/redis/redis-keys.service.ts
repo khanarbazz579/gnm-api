@@ -9,15 +9,15 @@ export class CanRedisKeysService {
 
 
   userKey(user: Record<string, any>) {
-    return `guardian::${this.env}::user::${user.email}`;
+    return `gnm::${this.env}::user::${user.email}`;
   }
 
   appUserKey(user: Record<string, any>, app: Record<string, any>) {
-    return `guardian::${this.env}::user::${user.type}::${user.email}::app::${app.name || app.appName}`;
+    return `gnm::${this.env}::user::${user.type}::${user.email}::app::${app.name || app.appName}`;
   }
 
   userTokenKey(userId: number) {
-    return `can:${this.env}:guardian:${userId}:refresh_token`;
+    return `can:${this.env}:gnm:${userId}:refresh_token`;
   }
 
 }

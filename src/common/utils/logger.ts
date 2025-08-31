@@ -14,19 +14,19 @@ const logLikeFormat = {
 
   
 const fileRotateTransport = new transports.DailyRotateFile({
-    filename: `${process.env.LOG_PATH}/guardian-log-%DATE%.log`,
+    filename: `${process.env.LOG_PATH}/gnm-log-%DATE%.log`,
     datePattern: "YYYY-MM-DD",
     maxFiles: "30d",
   });
 
 
-const guardianLogger = createLogger({
+const gnmLogger = createLogger({
   level: "debug",
   format: format.combine(
     timestamp({
         format: "DD-MM-YYYY HH:mm:ss",
       }),
-    format.label({ label: 'Guardian' }),
+    format.label({ label: 'gnm' }),
     logLikeFormat,
     prettyPrint()
   ),
@@ -34,4 +34,4 @@ const guardianLogger = createLogger({
   
 });
 
-module.exports = guardianLogger;
+module.exports = gnmLogger;

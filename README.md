@@ -44,7 +44,7 @@ A comprehensive NestJS-based API system for managing tasks, machines, and data i
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd guardian-api
+   cd gnm-api
    ```
 
 2. **Install dependencies**
@@ -68,7 +68,7 @@ A comprehensive NestJS-based API system for managing tasks, machines, and data i
    DB_PORT=5432
    DB_USER=postgres
    DB_PASS=your_password
-   DB_NAME=guardian_dev
+   DB_NAME=gnm_dev
    
    # Redis Configuration
    REDIS_HOST_URL=localhost
@@ -82,7 +82,7 @@ A comprehensive NestJS-based API system for managing tasks, machines, and data i
 4. **Database Setup**
    Ensure PostgreSQL is running and create the required databases:
    ```sql
-   CREATE DATABASE guardian_dev;
+   CREATE DATABASE gnm_dev;
    ```
 
 ## Usage
@@ -153,7 +153,7 @@ npm run format
 ## Project Structure
 
 ```
-guardian-api/
+gnm-api/
 ├── src/
 │   ├── apis/                 # API endpoints and modules
 │   ├── common/              # Shared services and utilities
@@ -265,7 +265,7 @@ AS SELECT u.id AS user_id,
 
   -- public.user_app_role_permissions source
   
-  scp -i ./nuros_gcp.pem ../guardian-api/dist/main.js systemadmin@34.131.205.168:/home/systemadmin/projects/codebases/guardian-api
+  scp -i ./nuros_gcp.pem ../gnm-api/dist/main.js systemadmin@34.131.205.168:/home/systemadmin/projects/codebases/gnm-api
 
 
 

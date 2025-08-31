@@ -146,7 +146,7 @@ export class AuthService {
       loginOtp:'1234',
       otpSecret,
     });
-    const message = `${1234} is your otp to login into Guardian!`;
+    const message = `${1234} is your otp to login into gnm!`;
     const smsApi = { ...SMS_API_CONFIG };
     smsApi['mobiles'] = mobile;
     // smsApi['message'] = message;

@@ -1,8 +1,8 @@
 # version: '3.8'
 # services:
 #     nexus-dev:
-#         container_name: guardian
-#         image: guardian-dev:1.0.0
+#         container_name: gnm
+#         image: gnm-dev:1.0.0
 #         build:
 #             context: .
 #             target: development

@@ -62,10 +62,10 @@ console.log(process.env.NODE_ENV);
   CanContextService.init(app);
   // Swagger Configuration
   const options = new DocumentBuilder()
-    .setTitle('Guardian API')
-    .setDescription('Guardian API description')
+    .setTitle('Gnm API')
+    .setDescription('Gnm API description')
     .setVersion('1.0')
-    .addTag('Guardian')
+    .addTag('Gnm')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('v1', app, document);
