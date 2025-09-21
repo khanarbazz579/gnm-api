@@ -1,7 +1,14 @@
-import { Table, Model, Column, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
-import { User } from 'src/core/user/user.model';
+import {
+  Table,
+  Model,
+  Column,
+  DataType,
+  ForeignKey,
+  BelongsTo,
+} from "sequelize-typescript";
+import { User } from "src/core/user/user.model";
 
-@Table({ tableName: 'wishlists' })
+@Table({ tableName: "wishlists" })
 export class Wishlist extends Model<Wishlist> {
   @Column({
     type: DataType.INTEGER,
@@ -10,52 +17,49 @@ export class Wishlist extends Model<Wishlist> {
     unique: true,
   })
   id: number;
-  
-  
+
   @Column({
     type: DataType.DOUBLE,
-    field: 'total_amount',
+    field: "total_amount",
     allowNull: true,
   })
   totalAmount: number;
 
- 
   @Column({
     type: DataType.STRING,
-    field: 'status',
-    defaultValue: 'open',
+    field: "status",
+    defaultValue: "open",
   })
-  status: 'open' | 'closed';
+  status: "open" | "closed";
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
-    field: 'user_id',
+    field: "user_id",
     allowNull: true,
   })
   userId: number;
 
-  @BelongsTo(() => User, 'userId')
+  @BelongsTo(() => User, "userId")
   user: User;
 
-    
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
-    field: 'created_by_id',
+    field: "created_by_id",
   })
   createdById: number;
 
-  @BelongsTo(() => User, 'createdById')
+  @BelongsTo(() => User, "createdById")
   createdBy: User;
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
-    field: 'updated_by_id',
+    field: "updated_by_id",
   })
   updatedById: number;
 
-  @BelongsTo(() => User, 'updatedById')
+  @BelongsTo(() => User, "updatedById")
   updatedBy: User;
 }

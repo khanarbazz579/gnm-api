@@ -39,7 +39,7 @@ import { ProductModule } from "./product/product.module";
     ProgressModule,
     TransactionModule,
     WishlistModule,
-    WishlistDetailsModule
+    WishlistDetailsModule,
   ],
   providers: [],
   exports: [],

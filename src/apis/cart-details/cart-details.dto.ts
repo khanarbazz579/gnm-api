@@ -1,16 +1,9 @@
-import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsEnum,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-} from 'class-validator';
-import { Status } from 'src/common/enums/status.enum';
+import { ApiProperty } from "@nestjs/swagger";
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional } from "class-validator";
+import { Status } from "src/common/enums/status.enum";
 // import { Status } from '../status/status.model';
 
 export class CartDetailsDto {
-
-
   // @IsOptional()
   // @IsEnum(OrderStatus)
   // @ApiProperty()
@@ -35,15 +28,14 @@ export class CartDetailsDto {
   @IsNumber()
   @ApiProperty()
   readonly businessId: number;
-    
-@IsOptional()
-@IsNumber()
-@ApiProperty()
-readonly createdById: number;
 
-@IsOptional()
-@IsNumber()
-@ApiProperty()
-readonly updatedById: number;
+  @IsOptional()
+  @IsNumber()
+  @ApiProperty()
+  readonly createdById: number;
 
+  @IsOptional()
+  @IsNumber()
+  @ApiProperty()
+  readonly updatedById: number;
 }

@@ -1,13 +1,14 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { WISHLIST_REPOSITORY } from './wishlist.repository';
-import { Wishlist } from './wishlist.model';
-import { WishlistDto } from './wishlist.dto';
-import { FindOptions, CountOptions } from 'sequelize/types';
+import { Injectable, Inject } from "@nestjs/common";
+import { WISHLIST_REPOSITORY } from "./wishlist.repository";
+import { Wishlist } from "./wishlist.model";
+import { WishlistDto } from "./wishlist.dto";
+import { FindOptions, CountOptions } from "sequelize/types";
 
 @Injectable()
 export class WishlistService {
   constructor(
-    @Inject(WISHLIST_REPOSITORY) private readonly wishlistRepository: typeof Wishlist
+    @Inject(WISHLIST_REPOSITORY)
+    private readonly wishlistRepository: typeof Wishlist,
   ) {}
 
   // async create(wishlist: WishlistDto): Promise<Wishlist> {

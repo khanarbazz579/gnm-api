@@ -19,7 +19,7 @@ export class SubCategoryDto {
   @IsNumber()
   @ApiProperty()
   readonly createdById: number;
-  
+
   @IsOptional()
   @IsNumber()
   @ApiProperty()

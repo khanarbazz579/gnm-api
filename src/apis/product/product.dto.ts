@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from "@nestjs/swagger";
 import {
   IsArray,
   IsEnum,
@@ -6,8 +6,8 @@ import {
   IsNumber,
   IsOptional,
   IsString,
-} from 'class-validator';
-import { Status } from 'src/common/enums/status.enum';
+} from "class-validator";
+import { Status } from "src/common/enums/status.enum";
 
 export class ProductDto {
   @IsNotEmpty()
@@ -57,7 +57,7 @@ export class ProductDto {
 
   @IsOptional()
   @ApiProperty()
-  readonly featured:boolean;
+  readonly featured: boolean;
 
   @IsOptional()
   @ApiProperty()
@@ -78,7 +78,6 @@ export class ProductDto {
   @IsEnum(Status)
   @ApiProperty()
   readonly status: string;
-
 
   @IsNotEmpty()
   @IsNumber()

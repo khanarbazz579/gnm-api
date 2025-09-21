@@ -1,5 +1,5 @@
 import { forwardRef, Inject, Injectable } from "@nestjs/common";
-import {  SUBCATEGORY_REPOSITORY } from "./sub-categories.repository";
+import { SUBCATEGORY_REPOSITORY } from "./sub-categories.repository";
 import { SubCategory } from "./sub-categories.model";
 import { SubCategoryDto } from "./sub-categories.dto";
 import { CountOptions, FindOptions } from "sequelize";
@@ -16,7 +16,7 @@ export class SubCategoryService {
   }
 
   async findAll(filter: FindOptions) {
-    const subCategory = await this.subCategoryRepository.findAll(filter)
+    const subCategory = await this.subCategoryRepository.findAll(filter);
     return subCategory;
   }
 

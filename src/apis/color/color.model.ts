@@ -5,11 +5,11 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
-} from 'sequelize-typescript';
-import { User } from 'src/core/user/user.model';
-import { Product } from '../product/product.model';
+} from "sequelize-typescript";
+import { User } from "src/core/user/user.model";
+import { Product } from "../product/product.model";
 
-@Table({ tableName: 'colors' })
+@Table({ tableName: "colors" })
 export class Color extends Model<Color> {
   @Column({
     type: DataType.INTEGER,
@@ -21,14 +21,14 @@ export class Color extends Model<Color> {
 
   @Column({
     type: DataType.STRING,
-    field: 'name',
+    field: "name",
     allowNull: true,
   })
   name: string;
 
   @Column({
     type: DataType.STRING,
-    field: 'hex',
+    field: "hex",
     allowNull: false,
   })
   hex: string;
@@ -36,44 +36,43 @@ export class Color extends Model<Color> {
   @ForeignKey(() => Product)
   @Column({
     type: DataType.INTEGER,
-    field: 'product_id',
+    field: "product_id",
   })
   productId: number;
 
-  @BelongsTo(() => Product, 'productId')
+  @BelongsTo(() => Product, "productId")
   product: Product;
-    
+
   @Column({
     type: DataType.INTEGER,
-    field: 'quantity',
+    field: "quantity",
   })
   quantity: number;
 
-
   @Column({
     type: DataType.JSONB,
-    field: 'images',
+    field: "images",
     allowNull: true,
   })
   images: string[];
-  
+
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
-    field: 'created_by_id',
+    field: "created_by_id",
   })
   createdById: number;
 
-  @BelongsTo(() => User, 'createdById')
+  @BelongsTo(() => User, "createdById")
   createdBy: User;
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
-    field: 'updated_by_id',
+    field: "updated_by_id",
   })
   updatedById: number;
 
-  @BelongsTo(() => User, 'updatedById')
+  @BelongsTo(() => User, "updatedById")
   updatedBy: User;
 }

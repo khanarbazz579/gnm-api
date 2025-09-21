@@ -1,13 +1,14 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { WISHLISTDETAILS_REPOSITORY } from './wishlist-details.repository';
-import { WishlistDetails } from './wishlist-details.model';
-import { WishlistDetailsDto } from './wishlist-details.dto';
-import { FindOptions, CountOptions } from 'sequelize/types';
+import { Injectable, Inject } from "@nestjs/common";
+import { WISHLISTDETAILS_REPOSITORY } from "./wishlist-details.repository";
+import { WishlistDetails } from "./wishlist-details.model";
+import { WishlistDetailsDto } from "./wishlist-details.dto";
+import { FindOptions, CountOptions } from "sequelize/types";
 
 @Injectable()
 export class WishlistDetailsService {
   constructor(
-    @Inject(WISHLISTDETAILS_REPOSITORY) private readonly wishlistDetailsRepository: typeof WishlistDetails
+    @Inject(WISHLISTDETAILS_REPOSITORY)
+    private readonly wishlistDetailsRepository: typeof WishlistDetails,
   ) {}
 
   // async create(wishlistDetails: WishlistDetailsDto): Promise<WishlistDetails> {
@@ -19,7 +20,7 @@ export class WishlistDetailsService {
   }
 
   async deleteById(id: any): Promise<any> {
-    return this.wishlistDetailsRepository.destroy({where:{id}});
+    return this.wishlistDetailsRepository.destroy({ where: { id } });
   }
 
   async findById(id: number): Promise<WishlistDetails> {

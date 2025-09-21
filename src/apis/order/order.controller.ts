@@ -8,25 +8,23 @@ import {
   Param,
   ParseIntPipe,
   ValidationPipe,
-} from '@nestjs/common';
-import { OrderDto } from './order.dto';
-import { OrderService } from './order.service';
-import { ParseFilterPipe } from 'src/common/pipes/parse-filter.pipe';
-import { FindOptions, CountOptions } from 'sequelize';
-import { CanPermissions } from '@can/common';
+} from "@nestjs/common";
+import { OrderDto } from "./order.dto";
+import { OrderService } from "./order.service";
+import { ParseFilterPipe } from "src/common/pipes/parse-filter.pipe";
+import { FindOptions, CountOptions } from "sequelize";
+import { CanPermissions } from "@can/common";
 
-
-@Controller('orders')
+@Controller("orders")
 export class OrderController {
   constructor(private orderService: OrderService) {}
-
 
   // @Post()
   // async create(@Body(ValidationPipe) orderDto: OrderDto) {
   //   return this.orderService.create(orderDto);
   // }
 
-  @Post('retry')
+  @Post("retry")
   async retryOrderTransaction(
     @Body(ValidationPipe) order: { orderNumber: string; payLater?: boolean },
   ) {
@@ -37,7 +35,7 @@ export class OrderController {
   }
 
   @Get()
-  async findAll(@Query('filter', ParseFilterPipe) filter: FindOptions) {
+  async findAll(@Query("filter", ParseFilterPipe) filter: FindOptions) {
     return this.orderService.findAll(filter);
   }
 
@@ -48,11 +46,9 @@ export class OrderController {
   //   return this.orderService.getOrderItems(id);
   // }
 
-  @Get('products')
-  async products(
-    @Query('id') id: string
-  ){
-    return this.orderService.getOrderDetails(id)
+  @Get("products")
+  async products(@Query("id") id: string) {
+    return this.orderService.getOrderDetails(id);
   }
   // @Get('items')
   // generate(
@@ -61,24 +57,27 @@ export class OrderController {
   //   return this.orderService.getOrderItems(id);
   // }
 
-  @Get('amount')
-  async calculateOrderAmount(@Query('cartId') cartId: string) {
+  @Get("amount")
+  async calculateOrderAmount(@Query("cartId") cartId: string) {
     return this.orderService.calculateOrderAmount(parseInt(cartId));
   }
 
-  @Get('count')
-  async count(@Query('filter', ParseFilterPipe) filter: CountOptions) {
+  @Get("count")
+  async count(@Query("filter", ParseFilterPipe) filter: CountOptions) {
     return this.orderService.count(filter);
   }
 
-  @Get(':id')
-  async findById(@Param('id', ParseIntPipe) id: number,@Query('filter', ParseFilterPipe) filter: FindOptions) {
-    return this.orderService.findById(id,filter);
+  @Get(":id")
+  async findById(
+    @Param("id", ParseIntPipe) id: number,
+    @Query("filter", ParseFilterPipe) filter: FindOptions,
+  ) {
+    return this.orderService.findById(id, filter);
   }
 
-  @Patch(':id')
+  @Patch(":id")
   async updateById(
-    @Param('id', ParseIntPipe) id: number,
+    @Param("id", ParseIntPipe) id: number,
     @Body(new ValidationPipe({ skipMissingProperties: true }))
     orderDto: OrderDto,
   ) {

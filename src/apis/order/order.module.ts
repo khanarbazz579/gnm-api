@@ -1,16 +1,16 @@
-import { forwardRef, Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { UserModule } from 'src/core/user/user.module';
-import { AddressModule } from '../address/address.module';
-import { CartDetailsModule } from '../cart-details/cart-details.module';
-import { CartModule } from '../cart/cart.module';
-import { ProductModule } from '../product/product.module';
-import { ProgressModule } from '../progress/progress.module';
-import { SharedModule } from '../shared/shared.module';
-import { TransactionModule } from '../transaction/transaction.module';
-import { OrderController } from './order.controller';
-import { OrderRepository } from './order.repository';
-import { OrderService } from './order.service';
+import { forwardRef, Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+import { UserModule } from "src/core/user/user.module";
+import { AddressModule } from "../address/address.module";
+import { CartDetailsModule } from "../cart-details/cart-details.module";
+import { CartModule } from "../cart/cart.module";
+import { ProductModule } from "../product/product.module";
+import { ProgressModule } from "../progress/progress.module";
+import { SharedModule } from "../shared/shared.module";
+import { TransactionModule } from "../transaction/transaction.module";
+import { OrderController } from "./order.controller";
+import { OrderRepository } from "./order.repository";
+import { OrderService } from "./order.service";
 
 @Module({
   imports: [

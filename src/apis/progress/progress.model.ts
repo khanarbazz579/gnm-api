@@ -5,11 +5,11 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
-} from 'sequelize-typescript';
-import { User } from 'src/core/user/user.model';
-import { Order } from '../order/order.model';
+} from "sequelize-typescript";
+import { User } from "src/core/user/user.model";
+import { Order } from "../order/order.model";
 
-@Table({ tableName: 'progresses' })
+@Table({ tableName: "progresses" })
 export class Progress extends Model<Progress> {
   @Column({
     type: DataType.INTEGER,
@@ -21,89 +21,89 @@ export class Progress extends Model<Progress> {
 
   @Column({
     type: DataType.TEXT,
-    field: 'icon',
+    field: "icon",
     defaultValue:
-      'https://homefitt.s3.ap-south-1.amazonaws.com/1611251728976_choices.svg',
+      "https://homefitt.s3.ap-south-1.amazonaws.com/1611251728976_choices.svg",
   })
   icon: string;
 
   @Column({
     type: DataType.JSONB,
-    field: 'images',
+    field: "images",
     allowNull: true,
   })
   images: string[];
 
   @Column({
     type: DataType.STRING,
-    field: 'progress',
+    field: "progress",
     allowNull: false,
   })
   progress: string;
 
   @Column({
     type: DataType.TEXT,
-    field: 'remarks',
+    field: "remarks",
     allowNull: true,
   })
   remarks: string;
 
   @Column({
     type: DataType.STRING,
-    field: 'progressStatus',
-    defaultValue: 'open',
+    field: "progressStatus",
+    defaultValue: "open",
   })
   progressStatus:
-    | 'open'
-    | 'confirmed'
-    | 'in_progress'
-    | 'cancelled'
-    | 'completed';
+    | "open"
+    | "confirmed"
+    | "in_progress"
+    | "cancelled"
+    | "completed";
 
   @Column({
     type: DataType.STRING,
-    field: 'status',
-    defaultValue: 'active',
+    field: "status",
+    defaultValue: "active",
   })
-  status: 'active' | 'inactive';
+  status: "active" | "inactive";
 
   @ForeignKey(() => Order)
   @Column({
     type: DataType.INTEGER,
-    field: 'order_id',
+    field: "order_id",
   })
   orderId: number;
 
-  @BelongsTo(() => Order, 'orderId')
+  @BelongsTo(() => Order, "orderId")
   order: Order;
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
-    field: 'user_id',
+    field: "user_id",
   })
   userId: number;
 
-  @BelongsTo(() => User, 'userId')
+  @BelongsTo(() => User, "userId")
   user: User;
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
-    field: 'created_by_id',
+    field: "created_by_id",
   })
   createdById: number;
 
-  @BelongsTo(() => User, 'createdById')
+  @BelongsTo(() => User, "createdById")
   createdBy: User;
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
-    field: 'updated_by_id',
+    field: "updated_by_id",
   })
   updatedById: number;
 
-  @BelongsTo(() => User, 'updatedById')
+  @BelongsTo(() => User, "updatedById")
   updatedBy: User;
 }

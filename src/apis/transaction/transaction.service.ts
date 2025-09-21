@@ -1,20 +1,18 @@
-import { Injectable, Inject, forwardRef } from '@nestjs/common';
-import { TRANSACTION_REPOSITORY } from './transaction.repository';
-import { Transaction } from './transaction.model';
-import { TransactionDto } from './transaction.dto';
-import { FindOptions, CountOptions } from 'sequelize/types';
-import { OrderService } from '../order/order.service';
-import { CanNotificationService } from '@can/notification';
-import { UserService } from 'src/core/user/user.service';
-import { ProgressService } from '../progress/progress.service';
+import { Injectable, Inject, forwardRef } from "@nestjs/common";
+import { TRANSACTION_REPOSITORY } from "./transaction.repository";
+import { Transaction } from "./transaction.model";
+import { TransactionDto } from "./transaction.dto";
+import { FindOptions, CountOptions } from "sequelize/types";
+import { OrderService } from "../order/order.service";
+import { CanNotificationService } from "@can/notification";
+import { UserService } from "src/core/user/user.service";
+import { ProgressService } from "../progress/progress.service";
 
 @Injectable()
 export class TransactionService {
   constructor(
     @Inject(TRANSACTION_REPOSITORY)
     private readonly transactionRepository: typeof Transaction,
-
-
   ) {}
 
   // async create(transaction: Partial<TransactionDto>): Promise<Transaction> {
@@ -36,7 +34,6 @@ export class TransactionService {
   //     icon:status['icon']
   //   }
   //    this.progressService.create(orderProgress)
-
 
   //     await this.notificationService.sendNotification({
   //       category: 'Payment',
@@ -65,11 +62,12 @@ export class TransactionService {
 
   async findAll(filter: FindOptions) {
     return this.transactionRepository.findAll(filter);
-    
   }
- 
-  async sumOfSuccessTxn(orderId:number){
-   return this.transactionRepository.sum('amount',{where:{orderId, transactionStatus : 'TXN_SUCCESS'}})
+
+  async sumOfSuccessTxn(orderId: number) {
+    return this.transactionRepository.sum("amount", {
+      where: { orderId, transactionStatus: "TXN_SUCCESS" },
+    });
   }
 
   async findById(id: number): Promise<Transaction> {

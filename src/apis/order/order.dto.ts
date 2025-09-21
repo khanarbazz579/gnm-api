@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from "@nestjs/swagger";
 import {
   IsArray,
   IsBoolean,
@@ -7,22 +7,22 @@ import {
   IsNumber,
   IsOptional,
   IsString,
-} from 'class-validator';
+} from "class-validator";
 // import { OrderStatus } from 'src/common/enums/order.enum';
 
 enum PaymentStatus {
-  NONE = 'none',
-  BOOKING = 'booking',
-  PARTIAL = 'partial',
-  FULL = 'full',
+  NONE = "none",
+  BOOKING = "booking",
+  PARTIAL = "partial",
+  FULL = "full",
 }
 
 enum Status {
-  OPEN = 'open',
-  CONFIRMED = 'confirmed',
-  IN_PROGRESS = 'in_progress',
-  CANCELLED = 'cancelled',
-  COMPLETED = 'completed',
+  OPEN = "open",
+  CONFIRMED = "confirmed",
+  IN_PROGRESS = "in_progress",
+  CANCELLED = "cancelled",
+  COMPLETED = "completed",
 }
 
 export class OrderDto {
@@ -46,7 +46,6 @@ export class OrderDto {
   @ApiProperty()
   readonly itemAmount: number;
 
-
   @IsOptional()
   @IsEnum(PaymentStatus)
   @ApiProperty()
@@ -62,7 +61,6 @@ export class OrderDto {
   @ApiProperty()
   readonly payLater: boolean;
 
-
   @IsNotEmpty()
   @IsNumber()
   @ApiProperty()
@@ -76,8 +74,8 @@ export class OrderDto {
   @IsOptional()
   @ApiProperty()
   @IsBoolean()
-  readonly isAccepted:boolean;
-  
+  readonly isAccepted: boolean;
+
   @IsNotEmpty()
   @IsNumber()
   @ApiProperty()

@@ -1,5 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsNumber, IsBoolean } from 'class-validator';
+import { ApiProperty } from "@nestjs/swagger";
+import { IsNotEmpty, IsOptional, IsNumber, IsBoolean } from "class-validator";
 
 export class AddressDto {
   @IsOptional()
@@ -10,11 +10,9 @@ export class AddressDto {
   @ApiProperty()
   readonly name: string;
 
-
   @IsOptional()
   @ApiProperty()
   readonly lat: string;
-
 
   @IsOptional()
   @ApiProperty()

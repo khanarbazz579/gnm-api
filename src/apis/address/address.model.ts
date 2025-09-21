@@ -5,10 +5,10 @@ import {
   DataType,
   BelongsTo,
   ForeignKey,
-} from 'sequelize-typescript';
-import { User } from 'src/core/user/user.model';
+} from "sequelize-typescript";
+import { User } from "src/core/user/user.model";
 
-@Table({ tableName: 'addresses' })
+@Table({ tableName: "addresses" })
 export class Address extends Model<Address> {
   @Column({
     type: DataType.INTEGER,
@@ -20,86 +20,85 @@ export class Address extends Model<Address> {
 
   @Column({
     type: DataType.STRING,
-    field: 'registered_name',
+    field: "registered_name",
   })
   registeredName: string;
 
   @Column({
     type: DataType.STRING,
-    field: 'name',
+    field: "name",
   })
   name: string;
 
   @Column({
     type: DataType.STRING,
-    field: 'lat',
+    field: "lat",
   })
   lat: string;
 
-
   @Column({
     type: DataType.STRING,
-    field: 'lng',
+    field: "lng",
   })
   lng: string;
 
   @Column({
     type: DataType.STRING,
-    field: 'gstin',
+    field: "gstin",
   })
   gstin: string;
 
   @Column({
     type: DataType.STRING,
-    field: 'gstin_image',
+    field: "gstin_image",
   })
   gstinImage: string;
 
   @Column({
     type: DataType.STRING,
-    field: 'pan_number',
+    field: "pan_number",
   })
   panNumber: string;
 
   @Column({
     type: DataType.STRING,
-    field: 'country',
+    field: "country",
     allowNull: false,
-    defaultValue: 'India',
+    defaultValue: "India",
   })
   country: string;
 
   @Column({
     type: DataType.STRING,
-    field: 'state',
+    field: "state",
     allowNull: false,
   })
   state: string;
 
   @Column({
     type: DataType.STRING,
-    field: 'city',
+    field: "city",
     allowNull: false,
   })
   city: string;
 
   @Column({
     type: DataType.STRING,
-    field: 'pin_code',
+    field: "pin_code",
     allowNull: false,
   })
   pinCode: string;
 
   @Column({
     type: DataType.STRING,
-    field: 'address',
+    field: "address",
     allowNull: false,
   })
   address: string;
 
   @Column({
     type: DataType.BOOLEAN,
-    field: 'default',
+    field: "default",
     defaultValue: false,
   })
   default: boolean;
@@ -117,11 +116,11 @@ export class Address extends Model<Address> {
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
-    field: 'user_id',
+    field: "user_id",
     allowNull: true,
   })
   userId: number;
 
-  @BelongsTo(() => User, 'userId')
+  @BelongsTo(() => User, "userId")
   user: User;
 }

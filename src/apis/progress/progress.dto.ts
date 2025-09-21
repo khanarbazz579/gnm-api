@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from "@nestjs/swagger";
 import {
   IsArray,
   IsEnum,
@@ -6,7 +6,7 @@ import {
   IsNumber,
   IsOptional,
   IsString,
-} from 'class-validator';
+} from "class-validator";
 
 export class ProgressDto {
   @IsNotEmpty()
@@ -28,7 +28,6 @@ export class ProgressDto {
   @IsString()
   @ApiProperty()
   readonly remarks: string;
-
 
   @IsOptional()
   @IsString()

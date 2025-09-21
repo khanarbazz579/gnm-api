@@ -1,14 +1,15 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { ADDRESS_REPOSITORY } from './address.repository';
-import { Address } from './address.model';
-import { AddressDto } from './address.dto';
-import { FindOptions, CountOptions } from 'sequelize/types';
-import { Op } from 'sequelize';
+import { Injectable, Inject } from "@nestjs/common";
+import { ADDRESS_REPOSITORY } from "./address.repository";
+import { Address } from "./address.model";
+import { AddressDto } from "./address.dto";
+import { FindOptions, CountOptions } from "sequelize/types";
+import { Op } from "sequelize";
 
 @Injectable()
 export class AddressService {
   constructor(
-    @Inject(ADDRESS_REPOSITORY) private readonly addressRepository: typeof Address,
+    @Inject(ADDRESS_REPOSITORY)
+    private readonly addressRepository: typeof Address,
   ) {}
 
   async create(address: AddressDto): Promise<Address> {
@@ -30,7 +31,6 @@ export class AddressService {
   async updateById(id: number, data: object) {
     return this.addressRepository.update(data, { where: { id } });
   }
-
 
   async upsert(data: object) {
     return this.addressRepository.upsert(data);

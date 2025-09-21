@@ -1,9 +1,16 @@
-import { Table, Model, Column, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
-import { User } from 'src/core/user/user.model';
-import { Cart } from '../cart/cart.model';
-import { Product } from '../product/product.model';
+import {
+  Table,
+  Model,
+  Column,
+  DataType,
+  ForeignKey,
+  BelongsTo,
+} from "sequelize-typescript";
+import { User } from "src/core/user/user.model";
+import { Cart } from "../cart/cart.model";
+import { Product } from "../product/product.model";
 
-@Table({ tableName: 'cart_details' })
+@Table({ tableName: "cart_details" })
 export class CartDetails extends Model<CartDetails> {
   @Column({
     type: DataType.INTEGER,
@@ -12,40 +19,39 @@ export class CartDetails extends Model<CartDetails> {
     unique: true,
   })
   id: number;
-  
+
   @ForeignKey(() => Cart)
   @Column({
     type: DataType.INTEGER,
-    field: 'cart_id',
+    field: "cart_id",
   })
   cartId: number;
 
-  @BelongsTo(() => Cart, 'cartId')
+  @BelongsTo(() => Cart, "cartId")
   cart: Cart;
 
   @Column({
     type: DataType.STRING,
-    field: 'status',
-    defaultValue: 'open',
+    field: "status",
+    defaultValue: "open",
   })
-  status: 'open' | 'confirmed' | 'in_progress' | 'cancelled' | 'completed';
+  status: "open" | "confirmed" | "in_progress" | "cancelled" | "completed";
 
   @ForeignKey(() => Product)
   @Column({
     type: DataType.INTEGER,
-    field: 'product_id',
+    field: "product_id",
   })
   productId: number;
 
-  @BelongsTo(() => Product, 'productId')
+  @BelongsTo(() => Product, "productId")
   product: Product;
-    
+
   @Column({
     type: DataType.INTEGER,
-    field: 'quantity',
+    field: "quantity",
   })
   quantity: number;
-
 
   // @ForeignKey(() => Invoice)
   // @Column({
@@ -57,7 +63,6 @@ export class CartDetails extends Model<CartDetails> {
   // @BelongsTo(() => Invoice, 'invoiceId')
   // invoice: Invoice;
 
-
   // @ForeignKey(() => Business)
   // @Column({
   //   type: DataType.INTEGER,
@@ -67,24 +72,24 @@ export class CartDetails extends Model<CartDetails> {
 
   // @BelongsTo(() => Business, 'businessId')
   // business: Business;
-    
+
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
-    field: 'created_by_id',
+    field: "created_by_id",
   })
   createdById: number;
 
-  @BelongsTo(() => User, 'createdById')
+  @BelongsTo(() => User, "createdById")
   createdBy: User;
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
-    field: 'updated_by_id',
+    field: "updated_by_id",
   })
   updatedById: number;
 
-  @BelongsTo(() => User, 'updatedById')
+  @BelongsTo(() => User, "updatedById")
   updatedBy: User;
 }

@@ -1,13 +1,13 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { CART_REPOSITORY } from './cart.repository';
-import { Cart } from './cart.model';
-import { CartDto } from './cart.dto';
-import { FindOptions, CountOptions } from 'sequelize/types';
+import { Injectable, Inject } from "@nestjs/common";
+import { CART_REPOSITORY } from "./cart.repository";
+import { Cart } from "./cart.model";
+import { CartDto } from "./cart.dto";
+import { FindOptions, CountOptions } from "sequelize/types";
 
 @Injectable()
 export class CartService {
   constructor(
-    @Inject(CART_REPOSITORY) private readonly cartRepository: typeof Cart
+    @Inject(CART_REPOSITORY) private readonly cartRepository: typeof Cart,
   ) {}
 
   // async create(cart: CartDto): Promise<Cart> {

@@ -1,7 +1,13 @@
-import { Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { Category } from '../categories/categories.model'
+import {
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from "sequelize-typescript";
+import { Category } from "../categories/categories.model";
 
-@Table({ tableName: 'sub_categories' })
+@Table({ tableName: "sub_categories" })
 export class SubCategory extends Model<SubCategory> {
   @Column({
     type: DataType.INTEGER,
@@ -14,13 +20,13 @@ export class SubCategory extends Model<SubCategory> {
   @Column({
     type: DataType.STRING,
     allowNull: false,
-    field: 'name',
+    field: "name",
   })
   name: string;
 
   @Column({
     type: DataType.STRING,
-    field: 'description',
+    field: "description",
   })
   description: string;
 

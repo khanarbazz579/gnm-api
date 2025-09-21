@@ -1,15 +1,7 @@
-import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsEnum,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-} from 'class-validator';
+import { ApiProperty } from "@nestjs/swagger";
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional } from "class-validator";
 
 export class WishlistDetailsDto {
-
-    
-
   // @IsOptional()
   // @IsEnum(OrderStatus)
   // @ApiProperty()
@@ -35,14 +27,13 @@ export class WishlistDetailsDto {
   @ApiProperty()
   readonly businessId: number;
 
+  @IsOptional()
+  @IsNumber()
+  @ApiProperty()
+  readonly createdById: number;
 
-@IsOptional()
-@IsNumber()
-@ApiProperty()
-readonly createdById: number;
-
-@IsOptional()
-@IsNumber()
-@ApiProperty()
-readonly updatedById: number;
+  @IsOptional()
+  @IsNumber()
+  @ApiProperty()
+  readonly updatedById: number;
 }

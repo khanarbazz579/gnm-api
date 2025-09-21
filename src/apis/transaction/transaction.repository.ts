@@ -1,6 +1,6 @@
-import { Transaction } from './transaction.model';
+import { Transaction } from "./transaction.model";
 
-export const TRANSACTION_REPOSITORY = 'TRANSACTION_REPOSITORY';
+export const TRANSACTION_REPOSITORY = "TRANSACTION_REPOSITORY";
 
 export const TransactionRepository = {
   provide: TRANSACTION_REPOSITORY,

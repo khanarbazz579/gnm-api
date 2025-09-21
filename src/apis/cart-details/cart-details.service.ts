@@ -1,13 +1,14 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { CARTDETAILS_REPOSITORY } from './cart-details.repository';
-import { CartDetails } from './cart-details.model';
-import { CartDetailsDto } from './cart-details.dto';
-import { FindOptions, CountOptions } from 'sequelize/types';
+import { Injectable, Inject } from "@nestjs/common";
+import { CARTDETAILS_REPOSITORY } from "./cart-details.repository";
+import { CartDetails } from "./cart-details.model";
+import { CartDetailsDto } from "./cart-details.dto";
+import { FindOptions, CountOptions } from "sequelize/types";
 
 @Injectable()
 export class CartDetailsService {
   constructor(
-    @Inject(CARTDETAILS_REPOSITORY) private readonly cartDetailsRepository: typeof CartDetails
+    @Inject(CARTDETAILS_REPOSITORY)
+    private readonly cartDetailsRepository: typeof CartDetails,
   ) {}
 
   // async create(cartDetails: CartDetailsDto): Promise<CartDetails> {
@@ -22,9 +23,8 @@ export class CartDetailsService {
     return this.cartDetailsRepository.findByPk(id);
   }
 
-
   async deleteById(id: any): Promise<any> {
-    return this.cartDetailsRepository.destroy({where:{id}});
+    return this.cartDetailsRepository.destroy({ where: { id } });
   }
 
   async count(filter: CountOptions) {

@@ -1,17 +1,20 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { PRODUCTVARIENTS_REPOSITORY } from './product-varients.repository';
-import { ProductVarients } from './product-varients.model';
-import { ProductVarientsDto } from './product-varients.dto';
-import { FindOptions, CountOptions } from 'sequelize/types';
+import { Injectable, Inject } from "@nestjs/common";
+import { PRODUCTVARIENTS_REPOSITORY } from "./product-varients.repository";
+import { ProductVarients } from "./product-varients.model";
+import { ProductVarientsDto } from "./product-varients.dto";
+import { FindOptions, CountOptions } from "sequelize/types";
 
 @Injectable()
 export class ProductVarientsService {
   constructor(
-    @Inject(PRODUCTVARIENTS_REPOSITORY) private readonly productVarientsRepository: typeof ProductVarients
+    @Inject(PRODUCTVARIENTS_REPOSITORY)
+    private readonly productVarientsRepository: typeof ProductVarients,
   ) {}
 
   async create(productVarients: ProductVarientsDto): Promise<ProductVarients> {
-    return this.productVarientsRepository.create<ProductVarients>(productVarients);
+    return this.productVarientsRepository.create<ProductVarients>(
+      productVarients,
+    );
   }
 
   async findAll(filter: FindOptions) {

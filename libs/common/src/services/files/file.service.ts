@@ -40,14 +40,18 @@ export class CanFileService {
     return storage;
   }
 
-  public validateFiles(files: any, maxLength: number, extension:string = '.csv') {
+  public validateFiles(
+    files: any,
+    maxLength: number,
+    extension: string = ".csv",
+  ) {
     if (files.length > maxLength || files.length == 0) {
-      throw new BadRequestException('Multiple files are not allowed!');
+      throw new BadRequestException("Multiple files are not allowed!");
     }
     for (let i = 0; i < files.length; i++) {
       if (!files[i].originalname.endsWith(extension)) {
         throw new BadRequestException(
-          `Please upload a valid ${extension.split('.')[1]} file`,
+          `Please upload a valid ${extension.split(".")[1]} file`,
         );
       }
     }

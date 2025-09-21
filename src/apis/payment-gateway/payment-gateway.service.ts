@@ -1,13 +1,14 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { PAYMENTGATEWAY_REPOSITORY } from './payment-gateway.repository';
-import { PaymentGateway } from './payment-gateway.model';
-import { PaymentGatewayDto } from './payment-gateway.dto';
-import { FindOptions, CountOptions } from 'sequelize/types';
+import { Injectable, Inject } from "@nestjs/common";
+import { PAYMENTGATEWAY_REPOSITORY } from "./payment-gateway.repository";
+import { PaymentGateway } from "./payment-gateway.model";
+import { PaymentGatewayDto } from "./payment-gateway.dto";
+import { FindOptions, CountOptions } from "sequelize/types";
 
 @Injectable()
 export class PaymentGatewayService {
   constructor(
-    @Inject(PAYMENTGATEWAY_REPOSITORY) private readonly paymentGatewayRepository: typeof PaymentGateway
+    @Inject(PAYMENTGATEWAY_REPOSITORY)
+    private readonly paymentGatewayRepository: typeof PaymentGateway,
   ) {}
 
   // async create(paymentGateway: PaymentGatewayDto): Promise<PaymentGateway> {

@@ -1,13 +1,14 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { COMMENTS_REPOSITORY } from './comments.repository';
-import { Comments } from './comments.model';
-import { CommentsDto } from './comments.dto';
-import { FindOptions, CountOptions } from 'sequelize/types';
+import { Injectable, Inject } from "@nestjs/common";
+import { COMMENTS_REPOSITORY } from "./comments.repository";
+import { Comments } from "./comments.model";
+import { CommentsDto } from "./comments.dto";
+import { FindOptions, CountOptions } from "sequelize/types";
 
 @Injectable()
 export class CommentsService {
   constructor(
-    @Inject(COMMENTS_REPOSITORY) private readonly commentsRepository: typeof Comments
+    @Inject(COMMENTS_REPOSITORY)
+    private readonly commentsRepository: typeof Comments,
   ) {}
 
   async create(comments: CommentsDto): Promise<Comments> {

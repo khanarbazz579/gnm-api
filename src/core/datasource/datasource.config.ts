@@ -23,7 +23,7 @@ export class CanDataSourceConfig implements ICanDatasourceConfig {
       username: this.configService.get("DB_USER"),
       password: this.configService.get("DB_PASS"),
       database: this.configService.get("DB_NAME"),
-     // logging: this.configService.get("DB_LOGS") == "true",
+      // logging: this.configService.get("DB_LOGS") == "true",
       sync: { alter: this.configService.get("DB_SYNC_ALTER") === "true" },
       models: [...MODELS],
       pool: {

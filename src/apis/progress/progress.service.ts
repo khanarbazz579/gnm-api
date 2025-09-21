@@ -1,13 +1,13 @@
-import { Injectable, Inject, forwardRef } from '@nestjs/common';
-import { PROGRESS_REPOSITORY } from './progress.repository';
-import { Progress } from './progress.model';
-import { ProgressDto } from './progress.dto';
-import { FindOptions, CountOptions } from 'sequelize/types';
-import { OrderService } from '../order/order.service';
-import { CanNotificationService } from '@can/notification';
-import { UserService } from 'src/core/user/user.service';
-import { ConfigService } from '@nestjs/config';
-import * as moment from 'moment'
+import { Injectable, Inject, forwardRef } from "@nestjs/common";
+import { PROGRESS_REPOSITORY } from "./progress.repository";
+import { Progress } from "./progress.model";
+import { ProgressDto } from "./progress.dto";
+import { FindOptions, CountOptions } from "sequelize/types";
+import { OrderService } from "../order/order.service";
+import { CanNotificationService } from "@can/notification";
+import { UserService } from "src/core/user/user.service";
+import { ConfigService } from "@nestjs/config";
+import * as moment from "moment";
 
 @Injectable()
 export class ProgressService {
@@ -19,7 +19,6 @@ export class ProgressService {
     private notificationService: CanNotificationService,
     private userService: UserService,
     private configService: ConfigService,
-
   ) {}
 
   // async create(progress: ProgressDto): Promise<Progress> {
@@ -36,7 +35,7 @@ export class ProgressService {
   //           default: order.orderNumber,
   //         }]
 
-  //         this.triggerNotification(progress,'ORDER_DISPATCHED_NEW',data,whatappData);         
+  //         this.triggerNotification(progress,'ORDER_DISPATCHED_NEW',data,whatappData);
   //         break;
   //     case 'goods at site':{
   //       const data ={
@@ -44,12 +43,12 @@ export class ProgressService {
   //       }
   //       if(order.representativeId){
   //         const representative = await this.userService.findById(order.representativeId)
-  //          data['name'] = representative.name 
-  //       }  
-  //        this.triggerNotification(progress,'DELIVERY_HANDOVER',data);            
+  //          data['name'] = representative.name
+  //       }
+  //        this.triggerNotification(progress,'DELIVERY_HANDOVER',data);
 
   //       // }else{
-  //       //   this.triggerNotification(progress,'DELIVERY_HANDOVER_WITHOUT_REPRESENTATIVE',data);            
+  //       //   this.triggerNotification(progress,'DELIVERY_HANDOVER_WITHOUT_REPRESENTATIVE',data);
   //       // }
   //       break;
   //     }
@@ -63,14 +62,14 @@ export class ProgressService {
   //       }else{
   //         data['link'] = this.configService.get('INSTALLATION_START_PIC')
   //       }
-  //       this.triggerNotification(progress,'INSTALLATION_START_PIC',data);            
+  //       this.triggerNotification(progress,'INSTALLATION_START_PIC',data);
   //       break;
   //     }
   //     case 'work completed':{
-  //         this.triggerNotification(progress,'JOB_COMPLETE');            
+  //         this.triggerNotification(progress,'JOB_COMPLETE');
   //         break;
   //     }
-     
+
   //     default:
   //         break;
   //     }
@@ -81,22 +80,21 @@ export class ProgressService {
   //   return createdProgress;
   // }
 
-  async triggerNotification(progress, triggerName,data?,whatappData?){
+  async triggerNotification(progress, triggerName, data?, whatappData?) {
     const user = await this.userService.findById(progress.userId);
     const notify = {
-      category: 'Orders',
+      category: "Orders",
       trigger: triggerName,
       data,
-      sms :{
-        mobile : user.mobile
+      sms: {
+        mobile: user.mobile,
       },
-      whatsapp:{
-        mobile: user.mobile
-      }
-    }
-    if(whatappData) notify.data['whatsappData'] = whatappData
+      whatsapp: {
+        mobile: user.mobile,
+      },
+    };
+    if (whatappData) notify.data["whatsappData"] = whatappData;
     await this.notificationService.sendNotification(notify);
-    
   }
   async findAll(filter: FindOptions) {
     return this.progressRepository.findAll(filter);

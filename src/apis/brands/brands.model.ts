@@ -32,5 +32,4 @@ export class Brands extends Model<Brands> {
     allowNull: false,
   })
   name: string;
-
 }

@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from "@nestjs/swagger";
 import {
   IsBoolean,
   IsEnum,
@@ -7,8 +7,8 @@ import {
   IsObject,
   IsOptional,
   IsString,
-} from 'class-validator';
-import { Status } from 'src/common/enums/status.enum';
+} from "class-validator";
+import { Status } from "src/common/enums/status.enum";
 
 export class PaymentGatewayDto {
   @IsNotEmpty()
