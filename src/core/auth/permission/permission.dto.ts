@@ -9,7 +9,6 @@ import {
 import { PermissionStatus } from "./permission.model";
 
 export class PermissionDto {
-
   @IsNotEmpty()
   @IsString()
   @ApiProperty({

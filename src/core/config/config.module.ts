@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { DEV_ENV, PROD_ENV, PRODUCTION } from '../constants/app.constant';
+import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+import { DEV_ENV, PROD_ENV, PRODUCTION } from "../constants/app.constant";
 
 @Module({
   imports: [

@@ -1,7 +1,7 @@
-import { HttpService } from '@nestjs/axios';
-import {  Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import queryString from 'query-string';
+import { HttpService } from "@nestjs/axios";
+import { Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import queryString from "query-string";
 
 @Injectable()
 export class FacebookService {
@@ -12,12 +12,12 @@ export class FacebookService {
 
   getLoginUrl() {
     const stringifiedParams = queryString.stringify({
-      client_id: this.configService.get('FACEBOOK_APP_ID'),
-      redirect_uri: this.configService.get('FACEBOOK_REDIRECT_URL'),
-      scope: ['email', 'user_friends'].join(','), // comma seperated string
-      response_type: 'code',
-      auth_type: 'rerequest',
-      display: 'popup',
+      client_id: this.configService.get("FACEBOOK_APP_ID"),
+      redirect_uri: this.configService.get("FACEBOOK_REDIRECT_URL"),
+      scope: ["email", "user_friends"].join(","), // comma seperated string
+      response_type: "code",
+      auth_type: "rerequest",
+      display: "popup",
     });
     const facebookLoginUrl = `https://www.facebook.com/v4.0/dialog/oauth?${stringifiedParams}`;
     return facebookLoginUrl;
@@ -25,9 +25,9 @@ export class FacebookService {
 
   async getLoginResponse(redirectionCode: string) {
     const params = {
-      client_id: this.configService.get('FACEBOOK_APP_ID'),
-      client_secret: this.configService.get('FACEBOOK_APP_SECRET'),
-      redirect_uri: this.configService.get('FACEBOOK_REDIRECT_URL'),
+      client_id: this.configService.get("FACEBOOK_APP_ID"),
+      client_secret: this.configService.get("FACEBOOK_APP_SECRET"),
+      redirect_uri: this.configService.get("FACEBOOK_REDIRECT_URL"),
       code: redirectionCode,
     };
     const { data } = await this.httpService
@@ -40,7 +40,7 @@ export class FacebookService {
 
   async getUserProfile(accessToken: string) {
     const params = {
-      fields: ['id', 'email', 'first_name', 'last_name'].join(','),
+      fields: ["id", "email", "first_name", "last_name"].join(","),
       access_token: accessToken,
     };
     const { data } = await this.httpService

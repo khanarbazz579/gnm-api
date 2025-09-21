@@ -1,7 +1,7 @@
-import { CanEmailOptions } from './email/email.type';
-import { CanFirebasePushNotificationOptions } from './push/push.type';
-import { CanSmsOptions } from './sms/sms.type';
-import { CanWhatsappOptions } from './whatsapp/whatsapp.type';
+import { CanEmailOptions } from "./email/email.type";
+import { CanFirebasePushNotificationOptions } from "./push/push.type";
+import { CanSmsOptions } from "./sms/sms.type";
+import { CanWhatsappOptions } from "./whatsapp/whatsapp.type";
 
 export interface CanNotificationOptions {
   category: string;
@@ -14,7 +14,7 @@ export interface CanNotificationOptionsItem {
   push?: CanFirebasePushNotificationOptions;
   email?: CanEmailOptions[];
   data?: CanNotificationData;
-  whatsapp?:CanWhatsappOptions[];
+  whatsapp?: CanWhatsappOptions[];
 }
 
 export interface CanTriggerParams {
@@ -28,16 +28,16 @@ export interface CanNotificationSendOptions {
   data?: CanNotificationData;
   sms?: CanNotificationSMSSendParams;
   email?: CanNotificationEmailSendParams;
-  whatsapp?:CanNotificationWhatsappSendParams;
+  whatsapp?: CanNotificationWhatsappSendParams;
 }
 
 export interface CanNotificationData {
   [key: string]: any;
-  whatsappData?: CanWhatsappData[]
+  whatsappData?: CanWhatsappData[];
 }
 
-export interface CanWhatsappData{
-  default : string;
+export interface CanWhatsappData {
+  default: string;
 }
 export interface CanNotificationSMSSendParams {
   mobile: string;
@@ -45,7 +45,7 @@ export interface CanNotificationSMSSendParams {
 
 export interface CanNotificationEmailSendParams {
   to?: string[];
-  reciever?:CanEmailSenderParams[]
+  reciever?: CanEmailSenderParams[];
 }
 
 export interface CanEmailSenderParams {
@@ -53,11 +53,11 @@ export interface CanEmailSenderParams {
   name: string;
 }
 
-export interface CanNotificationEmailAttachments{
-  filename : string;
-  content : any;
-  contentType : string;
+export interface CanNotificationEmailAttachments {
+  filename: string;
+  content: any;
+  contentType: string;
 }
-export interface CanNotificationWhatsappSendParams{
-  mobile : string;
+export interface CanNotificationWhatsappSendParams {
+  mobile: string;
 }

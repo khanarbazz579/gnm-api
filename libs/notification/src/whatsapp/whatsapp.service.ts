@@ -1,7 +1,14 @@
-import { Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
-import { CAN_WHATSAPP_NOTIFICATION_OPTIONS } from './whatsapp.constant';
-import { CanWhatsappNotificationOptions, CanWhatsappOptions } from './whatsapp.type';
-import { HttpService } from '@nestjs/axios';
+import {
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+} from "@nestjs/common";
+import { CAN_WHATSAPP_NOTIFICATION_OPTIONS } from "./whatsapp.constant";
+import {
+  CanWhatsappNotificationOptions,
+  CanWhatsappOptions,
+} from "./whatsapp.type";
+import { HttpService } from "@nestjs/axios";
 
 @Injectable()
 export class CanWhatsappNotificationService {
@@ -18,24 +25,26 @@ export class CanWhatsappNotificationService {
         const param = params[i];
         param.api.data = {
           ...param.api.data,
-          to: '91' + param.mobile,
+          to: "91" + param.mobile,
           type: param.type,
         };
         param.api.data[param.type] = param.api.data[param.type];
-        if (param.type == 'hsm') {
-          param.api.data[param.type]['localizable_params'] =
-            param.data && param.data.whatsappData ? param.data.whatsappData : [];
-          param.api.data[param.type]['element_name'] = param.triggerName;
-          delete param.api.data['template'];
+        if (param.type == "hsm") {
+          param.api.data[param.type]["localizable_params"] =
+            param.data && param.data.whatsappData
+              ? param.data.whatsappData
+              : [];
+          param.api.data[param.type]["element_name"] = param.triggerName;
+          delete param.api.data["template"];
           param.api.data = {
             body: param.api.data,
           };
         }
 
-        if (param.type == 'template') {
+        if (param.type == "template") {
           param.api.data.ttl = 200000;
-          param.api.data[param.type]['name'] = param.triggerName;
-          delete param.api.data['hsm'];
+          param.api.data[param.type]["name"] = param.triggerName;
+          delete param.api.data["hsm"];
           param.api.data = {
             type: param.data.type,
             mime: param.data.mime,
@@ -50,15 +59,19 @@ export class CanWhatsappNotificationService {
         };
 
         try {
-          whatsappResponse.push(await this.httpService.post(url, body, headers).toPromise());
+          whatsappResponse.push(
+            await this.httpService.post(url, body, headers).toPromise(),
+          );
           // whatsappResponse.push(await this.httpService.request(param.api).toPromise())
           // whatsappResponse.push(await this.httpService.post(param.api.url,{body:param.api.body},{ headers:{'x-auth-token': param.api.token, 'Host':'app.yellowmessenger.com'}}).toPromise());
         } catch (error) {
-          throw new Error('ERROR IN SENDING WHATSAPP MESSAGE');
+          throw new Error("ERROR IN SENDING WHATSAPP MESSAGE");
         }
       }
     } else {
-      throw new Error('whatsapp params is required to send whatsapp notification');
+      throw new Error(
+        "whatsapp params is required to send whatsapp notification",
+      );
     }
     return whatsappResponse;
   }

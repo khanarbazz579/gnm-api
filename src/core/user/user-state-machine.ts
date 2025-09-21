@@ -1,25 +1,25 @@
-import { CanStateConfig } from '@can/state-machine';
-import { User } from './user.model';
+import { CanStateConfig } from "@can/state-machine";
+import { User } from "./user.model";
 
 export class UserStateMachine {
   constructor() {}
 
   static getConfig(): CanStateConfig {
     return {
-      name: 'UserModel',
+      name: "UserModel",
       model: User,
       changes: [
         {
-          key: 'status',
-          value: 'pending',
+          key: "status",
+          value: "pending",
           to: [
             {
-              value: 'approved',
+              value: "approved",
               before: [],
               after: [],
             },
             {
-              value: 'rejected',
+              value: "rejected",
               before: [],
               after: [],
             },
@@ -46,6 +46,6 @@ export class UserStateMachine {
   }
 
   static displayName(name: string) {
-    console.log('display name', name);
+    console.log("display name", name);
   }
 }

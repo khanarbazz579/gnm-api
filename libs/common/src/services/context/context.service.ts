@@ -1,4 +1,4 @@
-import { INestApplication, Injectable } from '@nestjs/common';
+import { INestApplication, Injectable } from "@nestjs/common";
 
 @Injectable()
 export class CanContextService {

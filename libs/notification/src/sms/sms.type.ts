@@ -1,5 +1,5 @@
-import { CanAwsOptions } from 'libs/aws/src';
-import { CanExternalApiOptions } from 'libs/common/src';
+import { CanAwsOptions } from "libs/aws/src";
+import { CanExternalApiOptions } from "libs/common/src";
 
 export interface CanSmsNotificationOptions {
   aws?: CanAwsOptions;
@@ -7,12 +7,12 @@ export interface CanSmsNotificationOptions {
 }
 
 export interface CanSmsOptions {
-  channel: 'aws' | 'api';
-  smsGateway:'msg91' | 'default'
+  channel: "aws" | "api";
+  smsGateway: "msg91" | "default";
   mobile: string;
   message: string;
-  type:'template' | 'default';
-  templateId?:string;
+  type: "template" | "default";
+  templateId?: string;
   data?: CanSmsData;
   aws?: CanAwsOptions;
   api?: CanExternalApiOptions;

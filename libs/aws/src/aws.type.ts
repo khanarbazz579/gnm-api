@@ -1,6 +1,9 @@
-import Mail from 'nodemailer/lib/mailer';
+import Mail from "nodemailer/lib/mailer";
 
-export type CanAwsOptions = CanAwsProfileCredentials | CanAwsEnvCredentials | CanAwsJsonCredentials;
+export type CanAwsOptions =
+  | CanAwsProfileCredentials
+  | CanAwsEnvCredentials
+  | CanAwsJsonCredentials;
 
 // export type CanAwsOptions = {
 //   profile: string;
@@ -8,13 +11,13 @@ export type CanAwsOptions = CanAwsProfileCredentials | CanAwsEnvCredentials | Ca
 // };
 
 export type CanAwsProfileCredentials = {
-  type: 'profile';
+  type: "profile";
   profile: string;
   region: string;
 };
 
 export type CanAwsEnvCredentials = {
-  type: 'env';
+  type: "env";
   accessKeyName: string;
   secretAccessKeyName: string;
   sessionTokenKeyName?: string;
@@ -22,7 +25,7 @@ export type CanAwsEnvCredentials = {
 };
 
 export type CanAwsJsonCredentials = {
-  type: 'json';
+  type: "json";
   fileName: string;
 };
 
@@ -39,7 +42,7 @@ export type CanAwsDeleteTopicParams = {
 };
 
 export type CanAwsCreateTopicSubscriptionParams = {
-  protocol: 'sms' | 'email' | 'application';
+  protocol: "sms" | "email" | "application";
   topicArn: string;
   endpoint: string; // sms : Mobile Number | email : EMAIL | application : Device Id
   profile?: string;

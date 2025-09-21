@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class CanTextParserService {
@@ -24,7 +24,7 @@ export class CanTextParserService {
     const separatedKeys = this.getKeysFromDynamicText(text);
     // Map Dynamic Text with Value
     if (separatedKeys && separatedKeys.length > 0) {
-      separatedKeys.forEach(sKey => {
+      separatedKeys.forEach((sKey) => {
         const mappedKey = this.mapSeparatedKey(sKey);
         const mappedValue = mappedData[mappedKey];
         mappedText = mappedText.replace(sKey, mappedValue);
@@ -46,9 +46,9 @@ export class CanTextParserService {
   }
 
   convertToProperCase(text: string): string {
-    const splittedText = text.trim().split(' ');
+    const splittedText = text.trim().split(" ");
     if (splittedText.length > 1) {
-      return splittedText.map(t => t[0].toUpperCase() + t.slice(1)).join(' ');
+      return splittedText.map((t) => t[0].toUpperCase() + t.slice(1)).join(" ");
     } else {
       return (
         splittedText[0][0].toUpperCase() +
@@ -77,6 +77,6 @@ export class CanTextParserService {
   private mapSeparatedKey(key: string) {
     const startBraceSeparator = new RegExp(/\{\{/); // match {{
     const endBraceSeparator = new RegExp(/\}\}/); // match }}
-    return key.replace(startBraceSeparator, '').replace(endBraceSeparator, '');
+    return key.replace(startBraceSeparator, "").replace(endBraceSeparator, "");
   }
 }

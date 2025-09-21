@@ -1,11 +1,19 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsEmail, MinLength, MaxLength, IsString, IsEnum, IsOptional } from 'class-validator';
+import { ApiProperty } from "@nestjs/swagger";
+import {
+  IsNotEmpty,
+  IsEmail,
+  MinLength,
+  MaxLength,
+  IsString,
+  IsEnum,
+  IsOptional,
+} from "class-validator";
 
 export enum SocialChannel {
-  FACEBOOK = 'facebook',
-  GOOGLE = 'google',
-  APPLE = 'apple',
-  OFFICE365 = 'office365',
+  FACEBOOK = "facebook",
+  GOOGLE = "google",
+  APPLE = "apple",
+  OFFICE365 = "office365",
 }
 export class LoginEmailDto {
   @IsNotEmpty()
@@ -32,7 +40,7 @@ export class LoginOtpDto {
 
 export class LoginResponseDto {
   token: string;
-  type: 'Bearer';
+  type: "Bearer";
 }
 
 export class RecoverDto {
@@ -83,7 +91,7 @@ export class SocialDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(SocialChannel, {
-    message: 'channel should be google, facebook, apple, office365',
+    message: "channel should be google, facebook, apple, office365",
   })
   channel: string;
 

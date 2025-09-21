@@ -19,7 +19,7 @@ export enum CategoryStatus {
   timestamps: true,
   underscored: true,
 })
-export class Categories extends Model<Categories> {
+export class Category extends Model<Category> {
   @Column({
     type: DataType.INTEGER,
     autoIncrement: true,
@@ -34,15 +34,15 @@ export class Categories extends Model<Categories> {
   })
   name: string;
 
-  @ForeignKey(() => Categories)
+  @ForeignKey(() => Category)
   @Column({
     type: DataType.INTEGER,
     allowNull: true,
   })
   parentId: number;
 
-  @BelongsTo(() => Categories, "parentId")
-  parent: Categories;
+  @BelongsTo(() => Category, "parentId")
+  parent: Category;
 
   @ForeignKey(() => Brands)
   @Column({

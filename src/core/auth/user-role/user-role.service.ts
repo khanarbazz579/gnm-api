@@ -1,8 +1,8 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { USERROLE_REPOSITORY } from './user-role.repository';
-import { UserRole } from './user-role.model';
-import { UserRoleDto } from './user-role.dto';
-import { FindOptions, CountOptions } from 'sequelize/types';
+import { Injectable, Inject } from "@nestjs/common";
+import { USERROLE_REPOSITORY } from "./user-role.repository";
+import { UserRole } from "./user-role.model";
+import { UserRoleDto } from "./user-role.dto";
+import { FindOptions, CountOptions } from "sequelize/types";
 
 @Injectable()
 export class UserRoleService {

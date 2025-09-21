@@ -1,6 +1,10 @@
-import { Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
-import * as AWS from 'aws-sdk';
-import { CAN_AWS_CONFIG } from './aws.constant';
+import {
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+} from "@nestjs/common";
+import * as AWS from "aws-sdk";
+import { CAN_AWS_CONFIG } from "./aws.constant";
 import {
   CanAwsCreateTopicParams,
   CanAwsDeleteTopicParams,
@@ -12,10 +16,10 @@ import {
   CanAwsS3DeleteParams,
   CanAwsSendSmsParams,
   CanAwsSendEmailParams,
-} from './aws.type';
-import * as nodemailer from 'nodemailer';
-import { ConfigService } from '@nestjs/config';
-const csv = require('csvtojson');
+} from "./aws.type";
+import * as nodemailer from "nodemailer";
+import { ConfigService } from "@nestjs/config";
+const csv = require("csvtojson");
 
 @Injectable()
 export class CanAwsService {
@@ -30,7 +34,10 @@ export class CanAwsService {
    * @param S3
    * @param params
    */
-  public uploadToS3(params: CanAwsS3UploadParams, S3?: AWS.S3): Promise<AWS.S3.ManagedUpload.SendData> {
+  public uploadToS3(
+    params: CanAwsS3UploadParams,
+    S3?: AWS.S3,
+  ): Promise<AWS.S3.ManagedUpload.SendData> {
     return new Promise(async (resolve, reject) => {
       if (!S3) {
         S3 = await this.getS3Object();
@@ -51,7 +58,10 @@ export class CanAwsService {
    * @param S3
    * @param params
    */
-  public deleteFromS3(params: CanAwsS3DeleteParams, S3?: AWS.S3): Promise<AWS.S3.DeleteObjectOutput> {
+  public deleteFromS3(
+    params: CanAwsS3DeleteParams,
+    S3?: AWS.S3,
+  ): Promise<AWS.S3.DeleteObjectOutput> {
     return new Promise(async (resolve, reject) => {
       if (!S3) {
         S3 = await this.getS3Object();
@@ -72,7 +82,10 @@ export class CanAwsService {
    * @param SNS
    * @param params
    */
-  public sendSMSThroughSNS(params: CanAwsSendSmsParams, SNS?: AWS.SNS): Promise<AWS.SNS.PublishResponse> {
+  public sendSMSThroughSNS(
+    params: CanAwsSendSmsParams,
+    SNS?: AWS.SNS,
+  ): Promise<AWS.SNS.PublishResponse> {
     return new Promise(async (resolve, reject) => {
       if (!SNS) {
         SNS = await this.getSNSObject();
@@ -101,7 +114,7 @@ export class CanAwsService {
     return new Promise(async (resolve, reject) => {
       if (!SES) {
         SES = await this.getSESObject({
-          type: 'profile',
+          type: "profile",
           profile: process.env.AWS_EMAIL_PROFILE,
           region: process.env.AWS_EMAIL_REGION,
         });
@@ -131,14 +144,17 @@ export class CanAwsService {
    *
    * @param params : AWSCreateTopicParams
    */
-  public async createTopic(params: CanAwsCreateTopicParams, SNS?: AWS.SNS): Promise<AWS.SNS.CreateTopicResponse> {
+  public async createTopic(
+    params: CanAwsCreateTopicParams,
+    SNS?: AWS.SNS,
+  ): Promise<AWS.SNS.CreateTopicResponse> {
     return new Promise(async (resolve, reject) => {
       if (!SNS) {
         // Create SNS Object
         SNS = await this.getSNSObject();
       }
       // Create Topic Params
-      params.name = params.name.replace(' ', '');
+      params.name = params.name.replace(" ", "");
       const topicParams: AWS.SNS.CreateTopicInput = {
         Name: params.name.toUpperCase(),
       };
@@ -150,7 +166,10 @@ export class CanAwsService {
     });
   }
 
-  public async deleteTopic(params: CanAwsDeleteTopicParams, SNS?: AWS.SNS): Promise<any> {
+  public async deleteTopic(
+    params: CanAwsDeleteTopicParams,
+    SNS?: AWS.SNS,
+  ): Promise<any> {
     return new Promise(async (resolve, reject) => {
       if (!SNS) {
         // Create SNS Object
@@ -186,7 +205,8 @@ export class CanAwsService {
       const subscriptionParams: AWS.SNS.SubscribeInput = {
         Protocol: params.protocol,
         TopicArn: params.topicArn,
-        Endpoint: params.protocol === 'sms' ? `+91${params.endpoint}` : params.endpoint,
+        Endpoint:
+          params.protocol === "sms" ? `+91${params.endpoint}` : params.endpoint,
       };
       // Subscribe to TOPIC
       SNS.subscribe(subscriptionParams)
@@ -201,11 +221,16 @@ export class CanAwsService {
    *
    * @param params: AWSCreatePlatformEndpointParams
    */
-  public async createPlatformEndpoint(params: CanAwsCreatePlatformEndpointParams, SNS?: AWS.SNS): Promise<string> {
+  public async createPlatformEndpoint(
+    params: CanAwsCreatePlatformEndpointParams,
+    SNS?: AWS.SNS,
+  ): Promise<string> {
     return new Promise(async (resolve, reject) => {
       // Create Platform Params
       const createEndpointParams: AWS.SNS.CreatePlatformEndpointInput = {
-        PlatformApplicationArn: process.env.AWS_SNS_PUSH_ANDROID_ARN ? process.env.AWS_SNS_PUSH_ANDROID_ARN : '',
+        PlatformApplicationArn: process.env.AWS_SNS_PUSH_ANDROID_ARN
+          ? process.env.AWS_SNS_PUSH_ANDROID_ARN
+          : "",
         Token: params.deviceId,
       };
       if (!SNS) {
@@ -231,10 +256,13 @@ export class CanAwsService {
    *
    * @param params: AWSSendPushNotificationParams
    */
-  public async sendPushNotificationUsingSNS(params: CanAwsSendPushNotificationParams, SNS?: AWS.SNS): Promise<string> {
+  public async sendPushNotificationUsingSNS(
+    params: CanAwsSendPushNotificationParams,
+    SNS?: AWS.SNS,
+  ): Promise<string> {
     return new Promise(async (resolve, reject) => {
       // Global Vars
-      let targetArn = '';
+      let targetArn = "";
       const message: any = {
         default: params.default,
       };
@@ -247,15 +275,23 @@ export class CanAwsService {
       // Configure Message Payload
       if (params.android || params.ios) {
         // Android || iOS Push Notification
-        message['GCM'] = JSON.stringify({
-          notification: params.android ? params.android.notification : params.ios ? params.ios.notification : {},
-          data: params.android ? params.android.data : params.ios ? params.ios.data : {},
+        message["GCM"] = JSON.stringify({
+          notification: params.android
+            ? params.android.notification
+            : params.ios
+            ? params.ios.notification
+            : {},
+          data: params.android
+            ? params.android.data
+            : params.ios
+            ? params.ios.data
+            : {},
         });
       }
       // Configure Push Params
       const pushParams: AWS.SNS.PublishInput = {
         Message: JSON.stringify(message),
-        MessageStructure: 'json',
+        MessageStructure: "json",
       };
       if (params.topicArn) {
         // Publish to Topic
@@ -277,7 +313,7 @@ export class CanAwsService {
         }) // Return Response
         .catch((error: AWS.AWSError) => {
           // Handle Error
-          if (error.code != 'EndpointDisabled') {
+          if (error.code != "EndpointDisabled") {
             reject(new Error(error.message));
           }
         });
@@ -291,7 +327,7 @@ export class CanAwsService {
     // Set AWS Credentials
     await this._setCredentails(params);
     // Create S3 Object
-    const S3 = new AWS.S3({ apiVersion: '2006-03-01' });
+    const S3 = new AWS.S3({ apiVersion: "2006-03-01" });
     // Return Object
     return S3;
   }
@@ -303,7 +339,7 @@ export class CanAwsService {
     // Set AWS Credentials
     await this._setCredentails(params);
     // Create SNS Object
-    const SNS = new AWS.SNS({ apiVersion: '2010-03-31' });
+    const SNS = new AWS.SNS({ apiVersion: "2010-03-31" });
     // Return Object
     return SNS;
   }
@@ -315,7 +351,7 @@ export class CanAwsService {
     // Set AWS Credentials
     await this._setCredentails(params);
     // Crate SES Object
-    const SES = new AWS.SES({ apiVersion: '2010-12-01' });
+    const SES = new AWS.SES({ apiVersion: "2010-12-01" });
     // Return Object
     return SES;
   }
@@ -323,7 +359,10 @@ export class CanAwsService {
   /**
    * Get S3 Object
    */
-  public async getObject(params: CanAwsS3UploadParams, S3?: AWS.S3): Promise<any> {
+  public async getObject(
+    params: CanAwsS3UploadParams,
+    S3?: AWS.S3,
+  ): Promise<any> {
     return new Promise(async (resolve, reject) => {
       if (!S3) {
         S3 = await this.getS3Object();
@@ -347,29 +386,47 @@ export class CanAwsService {
   private _setCredentails(params?: CanAwsOptions): Promise<boolean> {
     return new Promise((resolve) => {
       if (!params) {
-        params.type = 'profile';
-        if (params.type === 'profile' && this._canAwsConfig.type === 'profile') {
+        params.type = "profile";
+        if (
+          params.type === "profile" &&
+          this._canAwsConfig.type === "profile"
+        ) {
           params.profile = this._canAwsConfig.profile;
           params.region = this._canAwsConfig.region;
         }
       }
-      if (params.type === 'env') {
-        if (params.accessKeyName != 'AWS_ACCESS_KEY_ID')
-          throw new InternalServerErrorException('AWS_ACCESS_KEY_ID is not defined in env file');
-        if (params.secretAccessKeyName != 'AWS_SECRET_ACCESS_KEY')
-          throw new InternalServerErrorException('AWS_SECRET_ACCESS_KEY is not defined in env file');
-        if (params.sessionTokenKeyName && params.sessionTokenKeyName != 'AWS_SESSION_TOKEN')
-          throw new InternalServerErrorException('AWS_SESSION_TOKEN is not defined in env file');
-        if (params.regionKeyName && params.regionKeyName != 'AWS_REGION')
-          throw new InternalServerErrorException('AWS_REGION is not defined in env file');
+      if (params.type === "env") {
+        if (params.accessKeyName != "AWS_ACCESS_KEY_ID")
+          throw new InternalServerErrorException(
+            "AWS_ACCESS_KEY_ID is not defined in env file",
+          );
+        if (params.secretAccessKeyName != "AWS_SECRET_ACCESS_KEY")
+          throw new InternalServerErrorException(
+            "AWS_SECRET_ACCESS_KEY is not defined in env file",
+          );
+        if (
+          params.sessionTokenKeyName &&
+          params.sessionTokenKeyName != "AWS_SESSION_TOKEN"
+        )
+          throw new InternalServerErrorException(
+            "AWS_SESSION_TOKEN is not defined in env file",
+          );
+        if (params.regionKeyName && params.regionKeyName != "AWS_REGION")
+          throw new InternalServerErrorException(
+            "AWS_REGION is not defined in env file",
+          );
         // Set Region
-        AWS.config.update({ region: this._configService.get(params.regionKeyName) });
+        AWS.config.update({
+          region: this._configService.get(params.regionKeyName),
+        });
         // Resolve Promise
         resolve(true);
       }
-      if (params.type === 'profile') {
+      if (params.type === "profile") {
         if (!params.profile || !params.region) {
-          throw new InternalServerErrorException('Profile && Region is required for setting up aws credentials');
+          throw new InternalServerErrorException(
+            "Profile && Region is required for setting up aws credentials",
+          );
         }
         const credentials = new AWS.SharedIniFileCredentials({
           profile: params.profile,
@@ -381,18 +438,20 @@ export class CanAwsService {
         // Resolve Promise
         resolve(true);
       }
-      if (params.type === 'json') {
+      if (params.type === "json") {
         if (!params.fileName) {
-          throw new InternalServerErrorException('File Name is required for setting up aws credentials ');
+          throw new InternalServerErrorException(
+            "File Name is required for setting up aws credentials ",
+          );
         }
-        const configFilePath = 'src/common/config/' + params.fileName;
+        const configFilePath = "src/common/config/" + params.fileName;
         AWS.config.loadFromPath(configFilePath);
       }
     });
   }
 
   async getKey() {
-    return this._configService.get('SECRET_TOKEN');
+    return this._configService.get("SECRET_TOKEN");
   }
 
   async getSecretKey() {

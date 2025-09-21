@@ -1,6 +1,6 @@
-import { HttpService } from '@nestjs/axios';
-import { Injectable } from '@nestjs/common';
-import csvtojson = require('csvtojson');
+import { HttpService } from "@nestjs/axios";
+import { Injectable } from "@nestjs/common";
+import csvtojson = require("csvtojson");
 
 @Injectable()
 export class CanCsvParserService {

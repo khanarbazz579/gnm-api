@@ -3,40 +3,38 @@ import {
   ExecutionContext,
   Injectable,
   NestInterceptor,
-} from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { CanContextService } from '..';
-import { CAN_EXPORT_RESPONSE_TYPE } from '../constants';
+} from "@nestjs/common";
+import { Reflector } from "@nestjs/core";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { CanContextService } from "..";
+import { CAN_EXPORT_RESPONSE_TYPE } from "../constants";
 import {
   CanExportResponseData,
   CanExportResponseOption,
   CanExportResponseType,
-} from '../types/export-response.type';
-import { Request } from 'express';
-import { CanExcelExportService } from '../services/export-response/excel-export.service';
-import { unflatten } from 'flat';
+} from "../types/export-response.type";
+import { Request } from "express";
+import { CanExcelExportService } from "../services/export-response/excel-export.service";
+import { unflatten } from "flat";
 
 @Injectable()
 export class CanExportResponseInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-    const excelExportService: CanExcelExportService = CanContextService.getAppContext().get(
-      CanExcelExportService,
-    );
+    const excelExportService: CanExcelExportService =
+      CanContextService.getAppContext().get(CanExcelExportService);
     // Get Export Type
     const exportType = this.extractExportType(context);
 
     // Get Export Query
     const { exportQuery } = this.extractExportQuery(context);
-    context.switchToHttp().getRequest<Request>().query[
-      'filter'
-    ] = this.getMappedQuery(context);
+    context.switchToHttp().getRequest<Request>().query["filter"] =
+      this.getMappedQuery(context);
 
     // Return Response
     return next.handle().pipe(
-      map(async res => {
-        if (exportQuery && exportType === 'excel') {
+      map(async (res) => {
+        if (exportQuery && exportType === "excel") {
           let data = res;
           if (exportQuery.dataKey) {
             data = res[exportQuery.dataKey];
@@ -44,7 +42,9 @@ export class CanExportResponseInterceptor implements NestInterceptor {
           let mappedData = data;
           if (Array.isArray(data)) {
             try {
-              mappedData = data.map(d => unflatten(JSON.parse(JSON.stringify(d))));
+              mappedData = data.map((d) =>
+                unflatten(JSON.parse(JSON.stringify(d))),
+              );
               // const mappedArr = [];
               // for (let index = 0; index < data.length; index++) {
               //   const d = data[index];
@@ -69,17 +69,17 @@ export class CanExportResponseInterceptor implements NestInterceptor {
   private getMappedQuery(context: ExecutionContext) {
     const { exportQuery, query } = this.extractExportQuery(context);
     if (exportQuery && Object.keys(exportQuery).length) {
-      if ('filter' in context.switchToHttp().getRequest<Request>().query) {
+      if ("filter" in context.switchToHttp().getRequest<Request>().query) {
         const mappedQuery = JSON.parse(query);
         if (mappedQuery && Object.keys(mappedQuery).length) {
-          if ('limit' in mappedQuery) {
-            delete mappedQuery['limit'];
+          if ("limit" in mappedQuery) {
+            delete mappedQuery["limit"];
           }
-          if ('offset' in mappedQuery) {
-            delete mappedQuery['offset'];
+          if ("offset" in mappedQuery) {
+            delete mappedQuery["offset"];
           }
-          if ('skip' in mappedQuery) {
-            delete mappedQuery['skip'];
+          if ("skip" in mappedQuery) {
+            delete mappedQuery["skip"];
           }
         }
         return JSON.stringify(mappedQuery);
@@ -93,41 +93,41 @@ export class CanExportResponseInterceptor implements NestInterceptor {
     const request = context.switchToHttp().getRequest<Request>();
     let query =
       request.query && Object.keys(request.query).length > 0
-        ? JSON.parse(request.query['filter'] as any)
+        ? JSON.parse(request.query["filter"] as any)
         : null;
     /**
      * Manipulate Query
      */
     let exportQuery: CanExportResponseOption;
     if (query) {
-      if (query.hasOwnProperty('where')) {
-        if (query['where'].hasOwnProperty('exportExcel')) {
+      if (query.hasOwnProperty("where")) {
+        if (query["where"].hasOwnProperty("exportExcel")) {
           exportQuery = {
-            ...query['where']['exportExcel'],
+            ...query["where"]["exportExcel"],
           };
-          delete query['where']['exportExcel'];
-        } else if (query['where'].hasOwnProperty('and')) {
-          const index = query['where']['and'].findIndex((q: any) =>
-            q.hasOwnProperty('exportExcel'),
+          delete query["where"]["exportExcel"];
+        } else if (query["where"].hasOwnProperty("and")) {
+          const index = query["where"]["and"].findIndex((q: any) =>
+            q.hasOwnProperty("exportExcel"),
           );
           if (index >= 0) {
-            exportQuery = query['where']['and'][index]['exportExcel'];
+            exportQuery = query["where"]["and"][index]["exportExcel"];
             // (query['where']['and'] as CanExportResponseData[]).splice(index, 1);
-            if (query['where']['and'].length === 0) {
-              delete query['where']['and'];
+            if (query["where"]["and"].length === 0) {
+              delete query["where"]["and"];
             }
           }
         }
-      } else if (query.hasOwnProperty('exportExcel')) {
-        exportQuery = query['exportExcel'];
-        delete query['exportExcel'];
+      } else if (query.hasOwnProperty("exportExcel")) {
+        exportQuery = query["exportExcel"];
+        delete query["exportExcel"];
       }
     }
 
     if (exportQuery) {
       if (
         !Object.keys(query).length ||
-        ('where' in query && Object.keys(query['where']).length === 1)
+        ("where" in query && Object.keys(query["where"]).length === 1)
       ) {
         // query = JSON.stringify({ raw: true });
         // query['raw'] = true;

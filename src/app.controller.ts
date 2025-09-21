@@ -1,6 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
-import { Throttle } from '@nestjs/throttler';
-import { AppService } from './app.service';
+import { Controller, Get } from "@nestjs/common";
+import { Throttle } from "@nestjs/throttler";
+import { AppService } from "./app.service";
 
 @Controller()
 export class AppController {
@@ -12,7 +12,7 @@ export class AppController {
   }
 
   @Throttle(3, 60)
-  @Get('health-check')
+  @Get("health-check")
   async healthCheck() {
     return this.appService.healthCheck();
   }

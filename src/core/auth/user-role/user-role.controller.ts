@@ -8,13 +8,13 @@ import {
   Param,
   ParseIntPipe,
   ValidationPipe,
-} from '@nestjs/common';
-import { UserRoleDto } from './user-role.dto';
-import { UserRoleService } from './user-role.service';
-import { FindOptions, CountOptions } from 'sequelize';
-import { ParseFilterPipe } from 'src/common/pipes/parse-filter.pipe';
+} from "@nestjs/common";
+import { UserRoleDto } from "./user-role.dto";
+import { UserRoleService } from "./user-role.service";
+import { FindOptions, CountOptions } from "sequelize";
+import { ParseFilterPipe } from "src/common/pipes/parse-filter.pipe";
 
-@Controller('user-role')
+@Controller("user-role")
 export class UserRoleController {
   constructor(private userRolesService: UserRoleService) {}
 
@@ -24,23 +24,23 @@ export class UserRoleController {
   }
 
   @Get()
-  async findAll(@Query('filter', ParseFilterPipe) filter: FindOptions) {
+  async findAll(@Query("filter", ParseFilterPipe) filter: FindOptions) {
     return this.userRolesService.findAll(filter);
   }
 
-  @Get('count')
-  async count(@Query('filter', ParseFilterPipe) filter: CountOptions) {
+  @Get("count")
+  async count(@Query("filter", ParseFilterPipe) filter: CountOptions) {
     return this.userRolesService.count(filter);
   }
 
-  @Get(':id')
-  async findById(@Param('id', ParseIntPipe) id: number) {
+  @Get(":id")
+  async findById(@Param("id", ParseIntPipe) id: number) {
     return this.userRolesService.findById(id);
   }
 
-  @Patch(':id')
+  @Patch(":id")
   async updateById(
-    @Param('id', ParseIntPipe) id: number,
+    @Param("id", ParseIntPipe) id: number,
     @Body(new ValidationPipe({ skipMissingProperties: true }))
     userRolesDto: UserRoleDto,
   ) {

@@ -1,8 +1,8 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { PERMISSION_REPOSITORY } from './permission.repository';
-import { Permission } from './permission.model';
-import { PermissionDto } from './permission.dto';
-import { FindOptions, CountOptions } from 'sequelize';
+import { Injectable, Inject } from "@nestjs/common";
+import { PERMISSION_REPOSITORY } from "./permission.repository";
+import { Permission } from "./permission.model";
+import { PermissionDto } from "./permission.dto";
+import { FindOptions, CountOptions } from "sequelize";
 
 @Injectable()
 export class PermissionService {

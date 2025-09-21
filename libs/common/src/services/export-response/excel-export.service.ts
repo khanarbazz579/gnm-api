@@ -3,16 +3,16 @@ import {
   CanExportResponseData,
   CanExportResponseKey,
   CanExportResponseOption,
-} from '@can/common';
-import { CanTextParserService } from '@can/common/helpers';
-import { ExecutionContext, Injectable } from '@nestjs/common';
-import flatten = require('flat');
-import { isArray, isObject } from 'lodash';
-import moment = require('moment-timezone');
-import fs = require('fs');
-import Excel = require('exceljs');
-import { Response } from 'express';
-import { CanExportResponseType } from '@can/common/types';
+} from "@can/common";
+import { CanTextParserService } from "@can/common/helpers";
+import { ExecutionContext, Injectable } from "@nestjs/common";
+import flatten = require("flat");
+import { isArray, isObject } from "lodash";
+import moment = require("moment-timezone");
+import fs = require("fs");
+import Excel = require("exceljs");
+import { Response } from "express";
+import { CanExportResponseType } from "@can/common/types";
 
 @Injectable()
 export class CanExcelExportService {
@@ -27,20 +27,20 @@ export class CanExcelExportService {
   async exportExcel(params: CanExportResponseOption) {
     if (params.exportAll && params.keys && params.dataKey) {
       throw new Error(
-        'exportAll & keys && dataKey can not be used simultaneously',
+        "exportAll & keys && dataKey can not be used simultaneously",
       );
     }
     if (params.exportAll && params.keys) {
-      throw new Error('exportAll & keys can not be used simultaneously');
+      throw new Error("exportAll & keys can not be used simultaneously");
     }
     if (params.exportAll && params.dataKey) {
-      throw new Error('exportAll & dataKey can not be used simultaneously');
+      throw new Error("exportAll & dataKey can not be used simultaneously");
     }
     if (params.keys && params.dataKey) {
-      throw new Error('keys & dataKey can not be used simultaneously');
+      throw new Error("keys & dataKey can not be used simultaneously");
     }
     if (!params.exportAll && !params.keys && !params.dataKey) {
-      throw new Error('exportAll or keys or dataKey is required');
+      throw new Error("exportAll or keys or dataKey is required");
     }
     // Export All Data Into Excel
     if (params.exportAll) {
@@ -70,7 +70,7 @@ export class CanExcelExportService {
       : [data];
     if (params.dataKey && params.additionalKeysForDataKey) {
       const mappedObject: any = {};
-      params.additionalKeysForDataKey.forEach(key => {
+      params.additionalKeysForDataKey.forEach((key) => {
         mappedObject[key] = data[key];
       });
       mappedResult = mappedResult.map((res: any) => {
@@ -87,12 +87,12 @@ export class CanExcelExportService {
       // Send Buffer as Response to client
       const response = context.switchToHttp().getResponse<Response>();
       response.setHeader(
-        'Content-disposition',
-        'attachment; filename=' +
+        "Content-disposition",
+        "attachment; filename=" +
           `${new Date().toLocaleDateString()}_result.xlsx`,
       );
       response.contentType(
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       );
       response.send(arrayBuffer);
     }
@@ -126,12 +126,12 @@ export class CanExcelExportService {
     const newDataSet: any = [];
     params.data = params.data ? params.data : [];
     // Extract Keys Names From Keys Object Array
-    const keys = params.keys ? params.keys.map(key => key.name) : [];
+    const keys = params.keys ? params.keys.map((key) => key.name) : [];
     params.data.forEach((obj: any) => {
       // Extract selected keys from data set
       const flatObject: any = flatten(obj);
       const dataObj: any = {};
-      keys.forEach(key => {
+      keys.forEach((key) => {
         if (obj.hasOwnProperty(key)) {
           dataObj[key] = obj[key];
           const keyValue: any = obj[key];
@@ -141,9 +141,9 @@ export class CanExcelExportService {
               if (
                 isArray(objKeyValue) &&
                 objKeyValue &&
-                typeof objKeyValue[0] === 'string'
+                typeof objKeyValue[0] === "string"
               ) {
-                (keyValue as any)[objKey] = objKeyValue.join(' | ');
+                (keyValue as any)[objKey] = objKeyValue.join(" | ");
               }
             });
             dataObj[key] = keyValue;
@@ -151,9 +151,9 @@ export class CanExcelExportService {
           if (
             isArray(keyValue) &&
             keyValue &&
-            typeof keyValue[0] === 'string'
+            typeof keyValue[0] === "string"
           ) {
-            dataObj[key] = keyValue.join(' | ');
+            dataObj[key] = keyValue.join(" | ");
           }
         } else if (flatObject.hasOwnProperty(key)) {
           dataObj[key] = flatObject[key];
@@ -174,11 +174,11 @@ export class CanExcelExportService {
    * @param params : ExcelExportParams
    */
   private convertToExcel(params: CanExportResponseOption) {
-    return new Promise<Buffer>(resolve => {
+    return new Promise<Buffer>((resolve) => {
       params.data = params.data ? params.data : [];
       // Parse Nested object into Flat Object
       // let parsedData: any = params.data.map(obj => this.flatDataObject(obj));
-      let parsedData:any = params.data;
+      let parsedData: any = params.data;
       // Parse Date String to Date & Amount to upto 2 decimal points
       parsedData = parsedData.map((obj: any) =>
         this.mapDateAndAmountFormatInsideObject(
@@ -198,11 +198,11 @@ export class CanExcelExportService {
         );
       } else {
         if (params.keys && Array.isArray(params.keys)) {
-          let emptyObject = {}
+          let emptyObject = {};
           for (let i = 0; i < params.keys.length; i++) {
-            emptyObject[params.keys[i].transformedName] = ''
+            emptyObject[params.keys[i].transformedName] = "";
           }
-          parsedData = [emptyObject]
+          parsedData = [emptyObject];
         }
       }
 
@@ -214,14 +214,14 @@ export class CanExcelExportService {
       }
       // Creating Excel Sheet
       const workbook = new Excel.Workbook();
-      const worksheet: Excel.Worksheet = workbook.addWorksheet('Sheet 1');
+      const worksheet: Excel.Worksheet = workbook.addWorksheet("Sheet 1");
       // Creating Sheet Column
-      const mergedObj = parsedData.reduce(function(acc: any, value: any) {
+      const mergedObj = parsedData.reduce(function (acc: any, value: any) {
         return Object.assign(acc, value);
       }, parsedData[0]);
       const objKeys = Object.keys(mergedObj);
       const columns: any = [];
-      objKeys.forEach(key => {
+      objKeys.forEach((key) => {
         const defaultWidth = 10;
         const keyWidth = key.length + defaultWidth;
         const valueWidth = mergedObj[key]
@@ -248,7 +248,7 @@ export class CanExcelExportService {
               throw readErr;
             }
             // Remove local file after successful conversion
-            fs.unlink(fileName, error => {
+            fs.unlink(fileName, (error) => {
               if (error) {
                 throw error;
               }
@@ -257,7 +257,7 @@ export class CanExcelExportService {
             resolve(data);
           });
         },
-        err => {
+        (err) => {
           throw err;
         },
       );
@@ -273,52 +273,52 @@ export class CanExcelExportService {
    */
   private mapDateAndAmountFormatInsideObject(
     obj: CanExportResponseData,
-    dateFormat = 'DD/MM/YYYY',
+    dateFormat = "DD/MM/YYYY",
     keys: CanExportResponseKey[] = [],
   ): any {
     const clonedObject = JSON.parse(JSON.stringify(obj));
     const objectKeys = Object.keys(clonedObject);
-    objectKeys.forEach(key => {
+    objectKeys.forEach((key) => {
       if (
-        typeof clonedObject[key] === 'string' ||
-        typeof clonedObject[key] === 'number'
+        typeof clonedObject[key] === "string" ||
+        typeof clonedObject[key] === "number"
       ) {
         // Find Key Config
-        const keyData = keys.find(k => k.name.includes(key));
+        const keyData = keys.find((k) => k.name.includes(key));
         // Map amount format inside object
         const amountRegex = new RegExp(/^\d+\.\d{1,100}$/gm);
         if (amountRegex.test(clonedObject[key])) {
           clonedObject[key] = parseFloat(<string>clonedObject[key])
             .toFixed(2)
             .toString();
-        } else if (typeof clonedObject[key] === 'string') {
+        } else if (typeof clonedObject[key] === "string") {
           // Map date format inside object
           let dateString: string = clonedObject[key];
-          const splittedString = dateString.split(' ');
+          const splittedString = dateString.split(" ");
           if (splittedString.length > 1) {
             dateString = splittedString[0];
           } else {
-            dateString = dateString.split('T')[0];
+            dateString = dateString.split("T")[0];
           }
-          if (moment(dateString, 'YYYY-MM-DD', true).isValid()) {
+          if (moment(dateString, "YYYY-MM-DD", true).isValid()) {
             if (keys.length) {
               if (keyData && keyData.dateFormat) {
                 clonedObject[key] = moment(clonedObject[key])
-                  .tz('Asia/Kolkata')
+                  .tz("Asia/Kolkata")
                   .format(keyData.dateFormat);
               } else {
                 clonedObject[key] = moment(clonedObject[key])
-                  .tz('Asia/Kolkata')
+                  .tz("Asia/Kolkata")
                   .format(dateFormat);
               }
             } else {
               clonedObject[key] = moment(clonedObject[key])
-                .tz('Asia/Kolkata')
+                .tz("Asia/Kolkata")
                 .format(dateFormat);
             }
           }
         } else {
-          if (keyData?.isNumber && typeof clonedObject[key] === 'number') {
+          if (keyData?.isNumber && typeof clonedObject[key] === "number") {
             clonedObject[key] = parseFloat(clonedObject[key]);
           } else {
             clonedObject[key] = clonedObject[key].toString();
@@ -341,11 +341,11 @@ export class CanExcelExportService {
   ) {
     const clonedObject = JSON.parse(JSON.stringify(obj));
     const objectKeys = Object.keys(clonedObject);
-    objectKeys.forEach(key => {
-      const formattedKey = this.convertKeyType(headerDisplayType ,key)
-        // headerDisplayType === 'uppercase'
-        //   ? key.toUpperCase()
-        //   : this.textParserService.convertToProperCase(key);
+    objectKeys.forEach((key) => {
+      const formattedKey = this.convertKeyType(headerDisplayType, key);
+      // headerDisplayType === 'uppercase'
+      //   ? key.toUpperCase()
+      //   : this.textParserService.convertToProperCase(key);
 
       clonedObject[formattedKey] = clonedObject[key];
       if (formattedKey !== key) {
@@ -356,27 +356,27 @@ export class CanExcelExportService {
   }
 
   private convertKeyType(
-    headerDisplayType:CanExportResponseOption["headerDisplayType"],
-    key:string){
+    headerDisplayType: CanExportResponseOption["headerDisplayType"],
+    key: string,
+  ) {
     switch (headerDisplayType) {
-      case 'uppercase':
-        return  key.toUpperCase();
-      case 'lowercase':
+      case "uppercase":
+        return key.toUpperCase();
+      case "lowercase":
         return key.toLowerCase();
-      case 'propercase':
-        return this.textParserService.convertToProperCase(key)
+      case "propercase":
+        return this.textParserService.convertToProperCase(key);
       default:
         return key;
     }
-
   }
   private flatDataObject(obj: CanExportResponseData) {
     const flatObject: any = flatten(obj);
     const flatObjectKeys = Object.keys(flatObject);
     const clonedObject: any = {};
-    flatObjectKeys.forEach(key => {
+    flatObjectKeys.forEach((key) => {
       // Map Nested Object keys to flat key
-      const splittedKey = key.split('.');
+      const splittedKey = key.split(".");
       if (splittedKey && splittedKey.length > 1) {
         const newKey = splittedKey[splittedKey.length - 1];
         clonedObject[newKey] = flatObject[key];
@@ -389,7 +389,7 @@ export class CanExcelExportService {
 
   private transformDataKey(dataObj: any, keys: CanExportResponseKey[]) {
     const clonedObject = { ...dataObj };
-    keys.forEach(key => {
+    keys.forEach((key) => {
       // const keyName = key.name.split('.')[key.name.split('.').length - 1];
       if (clonedObject.hasOwnProperty(key.name) && key.transformedName) {
         clonedObject[key.transformedName] = clonedObject[key.name];

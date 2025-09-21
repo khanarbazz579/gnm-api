@@ -1,9 +1,9 @@
-import { CanAwsModule } from 'libs/aws/src';
-import { DynamicModule, Module } from '@nestjs/common';
-import { CAN_EMAIL_NOTIFICATION_OPTIONS } from './email.constant';
-import { CanEmailNotificationService } from './email.service';
-import { CanEmailNotificationOptions } from './email.type';
-import { HttpModule } from '@nestjs/axios';
+import { CanAwsModule } from "libs/aws/src";
+import { DynamicModule, Module } from "@nestjs/common";
+import { CAN_EMAIL_NOTIFICATION_OPTIONS } from "./email.constant";
+import { CanEmailNotificationService } from "./email.service";
+import { CanEmailNotificationOptions } from "./email.type";
+import { HttpModule } from "@nestjs/axios";
 
 @Module({})
 export class CanEmailNotificationModule {

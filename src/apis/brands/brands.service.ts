@@ -1,13 +1,13 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { BRANDS_REPOSITORY } from './brands.repository';
-import { Brands } from './brands.model';
-import { BrandsDto } from './brands.dto';
-import { FindOptions, CountOptions } from 'sequelize/types';
+import { Injectable, Inject } from "@nestjs/common";
+import { BRANDS_REPOSITORY } from "./brands.repository";
+import { Brands } from "./brands.model";
+import { BrandsDto } from "./brands.dto";
+import { FindOptions, CountOptions } from "sequelize/types";
 
 @Injectable()
 export class BrandsService {
   constructor(
-    @Inject(BRANDS_REPOSITORY) private readonly brandsRepository: typeof Brands
+    @Inject(BRANDS_REPOSITORY) private readonly brandsRepository: typeof Brands,
   ) {}
 
   async create(brands: BrandsDto): Promise<Brands> {

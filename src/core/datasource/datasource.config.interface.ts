@@ -1,4 +1,4 @@
-import { SequelizeOptions } from 'sequelize-typescript';
+import { SequelizeOptions } from "sequelize-typescript";
 
 export interface ICanDatasourceConfig {
   dataSourceConfiguration: ICanDatasourceConfigAttributes;

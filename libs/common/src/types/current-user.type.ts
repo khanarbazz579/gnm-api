@@ -4,9 +4,9 @@ export interface CanCurrentUser {
   roles: string[];
   permissions: string[];
   orgDisplayName: string;
-  clientId: string| number;
+  clientId: string | number;
   email?: string;
-  status: 'active' | 'inactive';
+  status: "active" | "inactive";
 }
 
 export interface CanCurrentUserToken {

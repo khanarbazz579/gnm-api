@@ -8,15 +8,15 @@ import {
   Param,
   ParseIntPipe,
   ValidationPipe,
-} from '@nestjs/common';
-import { UserDto } from './user.dto';
-import { UserService } from './user.service';
-import { ParseFilterPipe } from '../../common/pipes/parse-filter.pipe';
-import { CountOptions, FindOptions } from 'sequelize';
-import { CanPermissions, CurrentUser } from '@can/common';
-import { CanCurrentUser } from '@can/common/types/current-user.type';
+} from "@nestjs/common";
+import { UserDto } from "./user.dto";
+import { UserService } from "./user.service";
+import { ParseFilterPipe } from "../../common/pipes/parse-filter.pipe";
+import { CountOptions, FindOptions } from "sequelize";
+import { CanPermissions, CurrentUser } from "@can/common";
+import { CanCurrentUser } from "@can/common/types/current-user.type";
 
-@Controller('users')
+@Controller("users")
 export class UserController {
   constructor(private userService: UserService) {}
 
@@ -26,54 +26,54 @@ export class UserController {
     return this.userService.create(userDto);
   }
 
-  
-  @Get('/validate/:appId')
-  async validateApp(
-    @Param('appId', ParseIntPipe) appId: number,
-    @CurrentUser() user: CanCurrentUser) {
-    return this.userService.activeAppUsers(user,appId);
-  }
+  // @Get("/validate/:appId")
+  // async validateApp(
+  //   @Param("appId", ParseIntPipe) appId: number,
+  //   @CurrentUser() user: CanCurrentUser,
+  // ) {
+  //   return this.userService.activeAppUsers(user, appId);
+  // }
 
-  @Get('/validate')
+  @Get("/validate")
   async validate(@CurrentUser() user: CanCurrentUser) {
     const mappedUser = { ...user };
     const permissions: any = {};
-    if(mappedUser.permissions){
+    if (mappedUser.permissions) {
       mappedUser.permissions.forEach(
-        permission => (permissions[permission] = true),
+        (permission) => (permissions[permission] = true),
       );
     }
-    mappedUser['userId'] = mappedUser['user_id'];
-    mappedUser['userName'] = mappedUser['user_name'];
-    mappedUser['mobile'] = mappedUser['mobile'];
+    mappedUser["userId"] = mappedUser["user_id"];
+    mappedUser["userName"] = mappedUser["user_name"];
+    mappedUser["mobile"] = mappedUser["mobile"];
     mappedUser.permissions = permissions;
-    delete mappedUser['user_id'];
-    delete mappedUser['user_name'];
+    delete mappedUser["user_id"];
+    delete mappedUser["user_name"];
     return mappedUser;
   }
 
   @Get()
   // @CanPermissions({ or: ['READ_USER'] })
-  async findAll(@Query('filter', ParseFilterPipe) filter: FindOptions) {
+  async findAll(@Query("filter", ParseFilterPipe) filter: FindOptions) {
     return this.userService.findAll(filter);
   }
 
-  @Get('count')
+  @Get("count")
   // @CanPermissions({ or: ['READ_USER'] })
-  async count(@Query('filter', ParseFilterPipe) filter: CountOptions) {
+  async count(@Query("filter", ParseFilterPipe) filter: CountOptions) {
     return this.userService.count(filter);
   }
 
-  @Get(':id')
+  @Get(":id")
   // @CanPermissions({ or: ['READ_USER'] })
-  async findById(@Param('id', ParseIntPipe) id: number) {
+  async findById(@Param("id", ParseIntPipe) id: number) {
     return this.userService.findById(id);
   }
 
-  @Patch(':id')
-  @CanPermissions({ or: ['UPDATE_USER'] })
+  @Patch(":id")
+  @CanPermissions({ or: ["UPDATE_USER"] })
   async updateById(
-    @Param('id', ParseIntPipe) id: number,
+    @Param("id", ParseIntPipe) id: number,
     @Body(new ValidationPipe({ skipMissingProperties: true }))
     userDto: Partial<UserDto>,
   ) {

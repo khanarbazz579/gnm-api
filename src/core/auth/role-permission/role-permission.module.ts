@@ -1,7 +1,7 @@
-import { Module } from '@nestjs/common';
-import { RolePermissionController } from './role-permission.controller';
-import { RolePermissionsRepository as RolePermissionRepository } from './role-permission.repository';
-import { RolePermissionService } from './role-permission.service';
+import { Module } from "@nestjs/common";
+import { RolePermissionController } from "./role-permission.controller";
+import { RolePermissionsRepository as RolePermissionRepository } from "./role-permission.repository";
+import { RolePermissionService } from "./role-permission.service";
 
 @Module({
   imports: [],

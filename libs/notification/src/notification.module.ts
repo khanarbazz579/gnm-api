@@ -1,11 +1,11 @@
-import { CanCommonModule } from 'libs/common/src';
-import { DynamicModule, Module } from '@nestjs/common';
-import { CanEmailNotificationModule } from './email/email.module';
-import { CAN_NOTIFICATION_OPTIONS } from './notification.constant';
-import { CanNotificationService } from './notification.service';
-import { CanNotificationOptions } from './notification.type';
-import { CanSmsNotificationModule } from './sms/sms.module';
-import { CanWhatsappNotificationModule } from './whatsapp/whatsapp.module';
+import { CanCommonModule } from "libs/common/src";
+import { DynamicModule, Module } from "@nestjs/common";
+import { CanEmailNotificationModule } from "./email/email.module";
+import { CAN_NOTIFICATION_OPTIONS } from "./notification.constant";
+import { CanNotificationService } from "./notification.service";
+import { CanNotificationOptions } from "./notification.type";
+import { CanSmsNotificationModule } from "./sms/sms.module";
+import { CanWhatsappNotificationModule } from "./whatsapp/whatsapp.module";
 
 @Module({})
 export class CanNotificationModule {

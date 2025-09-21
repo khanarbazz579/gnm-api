@@ -1,12 +1,12 @@
-import { Module } from '@nestjs/common';
-import { BrandsController } from './brands.controller';
-import { BrandsRepository } from './brands.repository';
-import { BrandsService } from './brands.service';
+import { Module } from "@nestjs/common";
+import { BrandsController } from "./brands.controller";
+import { BrandsRepository } from "./brands.repository";
+import { BrandsService } from "./brands.service";
 
 @Module({
-    imports: [],
-    controllers: [BrandsController],
-    providers: [BrandsRepository, BrandsService],
-    exports: [BrandsService]
+  imports: [],
+  controllers: [BrandsController],
+  providers: [BrandsRepository, BrandsService],
+  exports: [BrandsService],
 })
-export class BrandsModule { }
+export class BrandsModule {}

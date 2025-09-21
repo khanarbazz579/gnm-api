@@ -1,8 +1,8 @@
-import { DynamicModule, Module } from '@nestjs/common';
-import { CAN_WHATSAPP_NOTIFICATION_OPTIONS } from './whatsapp.constant';
-import { CanWhatsappNotificationService } from './whatsapp.service';
-import { CanWhatsappNotificationOptions } from './whatsapp.type';
-import { HttpModule } from '@nestjs/axios';
+import { DynamicModule, Module } from "@nestjs/common";
+import { CAN_WHATSAPP_NOTIFICATION_OPTIONS } from "./whatsapp.constant";
+import { CanWhatsappNotificationService } from "./whatsapp.service";
+import { CanWhatsappNotificationOptions } from "./whatsapp.type";
+import { HttpModule } from "@nestjs/axios";
 
 @Module({})
 export class CanWhatsappNotificationModule {

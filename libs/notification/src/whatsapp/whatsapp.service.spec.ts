@@ -1,7 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { CanWhatsappNotificationService } from './whatsapp.service';
+import { Test, TestingModule } from "@nestjs/testing";
+import { CanWhatsappNotificationService } from "./whatsapp.service";
 
-describe('WhatsappService', () => {
+describe("WhatsappService", () => {
   let service: CanWhatsappNotificationService;
 
   beforeEach(async () => {
@@ -9,10 +9,12 @@ describe('WhatsappService', () => {
       providers: [CanWhatsappNotificationService],
     }).compile();
 
-    service = module.get<CanWhatsappNotificationService>(CanWhatsappNotificationService);
+    service = module.get<CanWhatsappNotificationService>(
+      CanWhatsappNotificationService,
+    );
   });
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(service).toBeDefined();
   });
 });

@@ -1,9 +1,9 @@
-import { ExecutionContext, Injectable } from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
-import { CanContextService } from '../services/context/context.service';
-import { CanCurrentUser } from '../types/current-user.type';
-import { CAN_PERMISSIONS_CONFIG } from './permissions.constant';
-import { CanPermissionsConfig } from './permissions.type';
+import { ExecutionContext, Injectable } from "@nestjs/common";
+import { Reflector } from "@nestjs/core";
+import { CanContextService } from "../services/context/context.service";
+import { CanCurrentUser } from "../types/current-user.type";
+import { CAN_PERMISSIONS_CONFIG } from "./permissions.constant";
+import { CanPermissionsConfig } from "./permissions.type";
 
 @Injectable()
 export class CanPermissionsService {
@@ -95,9 +95,9 @@ export class CanPermissionsService {
     for (let i = 0; i < requiredPermissions.length; i++) {
       const permissionRegex = new RegExp(
         `^${requiredPermissions[i].trim()}$`,
-        'i',
+        "i",
       );
-      const foundPermission = userPermissions.find(permission =>
+      const foundPermission = userPermissions.find((permission) =>
         permission.trim().match(permissionRegex),
       );
       if (foundPermission) {
@@ -119,9 +119,9 @@ export class CanPermissionsService {
     for (let i = 0; i < requiredPermissions.length; i++) {
       const permissionRegex = new RegExp(
         `^${requiredPermissions[i].trim()}$`,
-        'i',
+        "i",
       );
-      let foundPermission = userPermissions.find(permission =>
+      let foundPermission = userPermissions.find((permission) =>
         permission.trim().match(permissionRegex),
       );
       if (!foundPermission) {

@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import fs = require('fs');
-import path = require('path');
-import multer = require('multer');
+import { BadRequestException, Injectable } from "@nestjs/common";
+import fs = require("fs");
+import path = require("path");
+import multer = require("multer");
 
 @Injectable()
 export class CanFileService {
@@ -11,7 +11,7 @@ export class CanFileService {
 
   private async removeTempFile(filePath: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      fs.unlink(filePath, err => {
+      fs.unlink(filePath, (err) => {
         if (err) reject(err);
         resolve(true);
       });
@@ -30,13 +30,26 @@ export class CanFileService {
   public static getFilesStorage() {
     // Set File Storage Path
     const storage = multer.diskStorage({
-      destination: function(req, file, cb) {
-        cb(null, './');
+      destination: function (req, file, cb) {
+        cb(null, "./");
       },
-      filename: function(req, file, cb) {
+      filename: function (req, file, cb) {
         cb(null, file.originalname);
       },
     });
     return storage;
+  }
+
+  public validateFiles(files: any, maxLength: number, extension:string = '.csv') {
+    if (files.length > maxLength || files.length == 0) {
+      throw new BadRequestException('Multiple files are not allowed!');
+    }
+    for (let i = 0; i < files.length; i++) {
+      if (!files[i].originalname.endsWith(extension)) {
+        throw new BadRequestException(
+          `Please upload a valid ${extension.split('.')[1]} file`,
+        );
+      }
+    }
   }
 }

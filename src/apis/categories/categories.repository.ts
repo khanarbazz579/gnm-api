@@ -1,8 +1,8 @@
-import { Categories } from './categories.model';
+import { Category } from "./categories.model";
 
-export const CATEGORIES_REPOSITORY = 'CATEGORIES_REPOSITORY';
+export const CATEGORY_REPOSITORY = "CATEGORY_REPOSITORY";
 
 export const CategoriesRepository = {
-  provide: CATEGORIES_REPOSITORY,
-  useValue: Categories,
+  provide: CATEGORY_REPOSITORY,
+  useValue: Category,
 };

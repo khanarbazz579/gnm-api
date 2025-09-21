@@ -141,10 +141,10 @@ export class User extends Model<User> {
 
   @Column({
     type: DataType.STRING,
-    field: 'type',
-    defaultValue: 'internal',
+    field: "type",
+    defaultValue: "internal",
   })
-  type: 'application' | 'internal' |'external';
+  type: "application" | "internal" | "external";
 
   @BeforeCreate
   static async beforeCreateHook(user: User) {

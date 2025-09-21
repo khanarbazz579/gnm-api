@@ -1,7 +1,7 @@
-import { DynamicModule, Module } from '@nestjs/common';
-import { CAN_PUSH_NOTIFICATION_OPTIONS } from './push.constant';
-import { CanPushNotificationService } from './push.service';
-import { CanPushNotificationOptions } from './push.type';
+import { DynamicModule, Module } from "@nestjs/common";
+import { CAN_PUSH_NOTIFICATION_OPTIONS } from "./push.constant";
+import { CanPushNotificationService } from "./push.service";
+import { CanPushNotificationOptions } from "./push.type";
 
 @Module({})
 export class CanPushNotificationModule {

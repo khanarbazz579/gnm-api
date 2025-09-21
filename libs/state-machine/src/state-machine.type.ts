@@ -1,5 +1,5 @@
-import { CanPermissionsConfig } from 'libs/common/src';
-import { Model, ModelCtor } from 'sequelize';
+import { CanPermissionsConfig } from "libs/common/src";
+import { Model, ModelCtor } from "sequelize";
 
 export interface CanStateConfig {
   name: string;

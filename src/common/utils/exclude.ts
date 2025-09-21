@@ -1,5 +1,5 @@
-import { FindOptions, Model } from 'sequelize';
-import { parseModelToJson } from './parser';
+import { FindOptions, Model } from "sequelize";
+import { parseModelToJson } from "./parser";
 
 /**
  * Exclude Property from Response
@@ -16,7 +16,7 @@ export function excludePropertyFromFind(
   if (filter) {
     if (
       filter.attributes &&
-      'exclude' in filter.attributes &&
+      "exclude" in filter.attributes &&
       filter.attributes.exclude
     ) {
       filter.attributes = {
@@ -46,6 +46,6 @@ export function excludePropertyFromModel<T extends Model, U>(
   properties: string[],
 ): U {
   const parsedData: any = parseModelToJson<T, object>(model);
-  properties.forEach(property => delete parsedData[property]);
+  properties.forEach((property) => delete parsedData[property]);
   return parsedData;
 }

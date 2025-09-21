@@ -3,5 +3,5 @@ export interface ExistingUser {
   user_name: string;
   roles: string[];
   permissions: string[];
-  status: 'active' | 'inactive';
+  status: "active" | "inactive";
 }

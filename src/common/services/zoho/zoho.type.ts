@@ -18,7 +18,7 @@ export interface PageContext {
   applied_filter: string;
   sort_column: string;
   sort_order: string;
-  search_criteria?:any[]
+  search_criteria?: any[];
 }
 
 export interface Tags {
@@ -150,7 +150,6 @@ export interface Transporters {
   transporter_name: string;
   transporter_registration_id: string;
 }
-
 
 export interface ZohoCustomerDetailResponse {
   code?: number;

@@ -1,6 +1,6 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { Sequelize } from 'sequelize-typescript';
-import { SEQUALIZE_DATABASE_PROVIDER } from 'src/core/constants/app.constant';
+import { Inject, Injectable } from "@nestjs/common";
+import { Sequelize } from "sequelize-typescript";
+import { SEQUALIZE_DATABASE_PROVIDER } from "src/core/constants/app.constant";
 
 @Injectable()
 export class QueryService {

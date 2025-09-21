@@ -1,8 +1,8 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { ROLEPERMISSION_REPOSITORY } from './role-permission.repository';
-import { RolePermission } from './role-permission.model';
-import { RolePermissionsDto } from './role-permission.dto';
-import { FindOptions, CountOptions } from 'sequelize/types';
+import { Injectable, Inject } from "@nestjs/common";
+import { ROLEPERMISSION_REPOSITORY } from "./role-permission.repository";
+import { RolePermission } from "./role-permission.model";
+import { RolePermissionsDto } from "./role-permission.dto";
+import { FindOptions, CountOptions } from "sequelize/types";
 
 @Injectable()
 export class RolePermissionService {

@@ -1,8 +1,8 @@
-import { CanAwsService } from 'libs/aws/src';
-import { Inject, Injectable } from '@nestjs/common';
-import { CAN_SMS_NOTIFICATION_OPTIONS } from './sms.constant';
-import { CanSmsNotificationOptions, CanSmsOptions } from './sms.type';
-import { HttpService } from '@nestjs/axios';
+import { CanAwsService } from "libs/aws/src";
+import { Inject, Injectable } from "@nestjs/common";
+import { CAN_SMS_NOTIFICATION_OPTIONS } from "./sms.constant";
+import { CanSmsNotificationOptions, CanSmsOptions } from "./sms.type";
+import { HttpService } from "@nestjs/axios";
 
 @Injectable()
 export class CanSmsNotificationService {
@@ -18,7 +18,7 @@ export class CanSmsNotificationService {
     if (params && params.length) {
       for (let i = 0; i < params.length; i++) {
         const param = params[i];
-        if (param.type == 'template') {
+        if (param.type == "template") {
           param.api.data = {
             ...param.api.data,
             sms: [
@@ -29,7 +29,7 @@ export class CanSmsNotificationService {
             ],
             DLT_TE_ID: param.templateId,
           };
-          param.api.headers['Content-Type'] = 'application/json';
+          param.api.headers["Content-Type"] = "application/json";
         } else {
           param.api.params = {
             ...param.api.params,
@@ -40,28 +40,35 @@ export class CanSmsNotificationService {
         const aws = param.aws ?? this.smsNotificationOptions.aws;
         const api = param.api ?? this.smsNotificationOptions.api;
 
-        if (param.channel === 'aws' && !aws) {
-          throw new Error('aws config is required to send sms through aws channel');
-        }
-        if (param.channel === 'api' && !api) {
-          throw new Error('api config is required to send sms through api channel');
-        }
-        if (param.channel === 'aws' && aws) {
-          const SNS = await this.awsService.getSNSObject(aws);
-          smsResponse.push(
-            await this.awsService.sendSMSThroughSNS({ PhoneNumber: param.mobile, Message: param.message }, SNS),
+        if (param.channel === "aws" && !aws) {
+          throw new Error(
+            "aws config is required to send sms through aws channel",
           );
         }
-        if (param.channel === 'api' && api) {
+        if (param.channel === "api" && !api) {
+          throw new Error(
+            "api config is required to send sms through api channel",
+          );
+        }
+        if (param.channel === "aws" && aws) {
+          const SNS = await this.awsService.getSNSObject(aws);
+          smsResponse.push(
+            await this.awsService.sendSMSThroughSNS(
+              { PhoneNumber: param.mobile, Message: param.message },
+              SNS,
+            ),
+          );
+        }
+        if (param.channel === "api" && api) {
           try {
             smsResponse.push(await this.httpService.request(api).toPromise());
           } catch (error) {
-            throw new Error('sms params is required to send sms notification');
+            throw new Error("sms params is required to send sms notification");
           }
         }
       }
     } else {
-      throw new Error('sms params is required to send sms notification');
+      throw new Error("sms params is required to send sms notification");
     }
     return smsResponse;
   }

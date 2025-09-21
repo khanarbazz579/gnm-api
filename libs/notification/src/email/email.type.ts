@@ -1,5 +1,5 @@
-import { CanAwsOptions, CanAwsSendEmailParams } from 'libs/aws/src';
-import { CanExternalApiOptions } from 'libs/common/src';
+import { CanAwsOptions, CanAwsSendEmailParams } from "libs/aws/src";
+import { CanExternalApiOptions } from "libs/common/src";
 
 export interface CanEmailNotificationOptions {
   from?: string;
@@ -8,8 +8,8 @@ export interface CanEmailNotificationOptions {
 }
 
 export interface CanEmailOptions extends CanAwsSendEmailParams {
-  channel: 'aws' | 'api';
-  emailApiGateway?: 'sendinblue' | 'default'
+  channel: "aws" | "api";
+  emailApiGateway?: "sendinblue" | "default";
   template?: CanEmailTemplateOptions;
   aws?: CanAwsOptions;
   api?: CanExternalApiOptions;

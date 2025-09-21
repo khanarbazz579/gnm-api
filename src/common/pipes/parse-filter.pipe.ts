@@ -1,5 +1,5 @@
-import { PipeTransform, Injectable } from '@nestjs/common';
-import { decodeUriValues } from '../utils/parser';
+import { PipeTransform, Injectable } from "@nestjs/common";
+import { decodeUriValues } from "../utils/parser";
 
 @Injectable()
 export class ParseFilterPipe implements PipeTransform {

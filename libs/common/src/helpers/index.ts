@@ -1,1 +1,1 @@
-export * from './parser/text-parser.service';
+export * from "./parser/text-parser.service";

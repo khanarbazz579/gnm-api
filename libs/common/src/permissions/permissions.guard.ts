@@ -1,8 +1,8 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { CanPermissionsConfig } from './permissions.type';
-import { CanPermissionsService } from './permissions.service';
-import { CanContextService } from '../services/context/context.service';
+import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
+import { Observable } from "rxjs";
+import { CanPermissionsConfig } from "./permissions.type";
+import { CanPermissionsService } from "./permissions.service";
+import { CanContextService } from "../services/context/context.service";
 
 @Injectable()
 export class CanPermissionsGuard implements CanActivate {
@@ -17,9 +17,8 @@ export class CanPermissionsGuard implements CanActivate {
       /**
        * Extract Permissions
        */
-      const permissions: CanPermissionsConfig = permissionService.extractPermissions(
-        context,
-      );
+      const permissions: CanPermissionsConfig =
+        permissionService.extractPermissions(context);
       /**
        * Validation Permissions If and / or permissions
        */
@@ -28,9 +27,8 @@ export class CanPermissionsGuard implements CanActivate {
         ((permissions.and && permissions.and.length) ||
           (permissions.or && permissions.or.length))
       ) {
-        const currentUser = permissionService.extractRolesAndPermissions(
-          context,
-        );
+        const currentUser =
+          permissionService.extractRolesAndPermissions(context);
         const isValid = permissionService.validatePermission(
           currentUser,
           permissions,

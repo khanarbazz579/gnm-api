@@ -1,24 +1,25 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { CATEGORIES_REPOSITORY } from './categories.repository';
-import { Categories } from './categories.model';
-import { CategoriesDto } from './categories.dto';
-import { FindOptions, CountOptions } from 'sequelize/types';
+import { Injectable, Inject } from "@nestjs/common";
+import { CATEGORY_REPOSITORY } from "./categories.repository";
+import { Category } from "./categories.model";
+import { CategoriesDto } from "./categories.dto";
+import { FindOptions, CountOptions } from "sequelize/types";
 
 @Injectable()
 export class CategoriesService {
   constructor(
-    @Inject(CATEGORIES_REPOSITORY) private readonly categoriesRepository: typeof Categories
+    @Inject(CATEGORY_REPOSITORY)
+    private readonly categoriesRepository: typeof Category,
   ) {}
 
-  async create(categories: CategoriesDto): Promise<Categories> {
-    return this.categoriesRepository.create<Categories>(categories);
+  async create(categories: CategoriesDto): Promise<Category> {
+    return this.categoriesRepository.create<Category>(categories);
   }
 
   async findAll(filter: FindOptions) {
     return this.categoriesRepository.findAll(filter);
   }
 
-  async findById(id: number): Promise<Categories> {
+  async findById(id: number): Promise<Category> {
     return this.categoriesRepository.findByPk(id);
   }
 

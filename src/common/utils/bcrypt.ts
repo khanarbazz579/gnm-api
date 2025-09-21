@@ -1,4 +1,4 @@
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from "bcrypt";
 
 /**
  * Convert plain password to encrypted password

@@ -1,28 +1,47 @@
-import { Module } from '@nestjs/common';
-import { SharedModule } from './shared/shared.module';
-import { CronModule } from 'src/common/cron/cron.module';
-import { ApplicationsModule } from 'src/apis/applications/applications.module';
-import { OrganizationsModule } from 'src/apis/organizations/organizations.module';
-import { OrganizationAddressesModule } from 'src/apis/organization-addresses/organization-addresses.module';
-import { OrganizationUsersModule } from 'src/apis/organization-users/organization-users.module';
-import { BrandsModule } from 'src/apis/brands/brands.module';
-import { CategoriesModule } from 'src/apis/categories/categories.module';
-import { AppPermissionsModule } from 'src/apis/app-permissions/app-permissions.module';
-import { AppRolePermissionsModule } from 'src/apis/app-role-permissions/app-role-permissions.module';
-import { AppRolesModule } from 'src/apis/app-roles/app-roles.module';
-import { UserAppRolePermissionsModule } from 'src/apis/user-app-role-permissions/user-app-role-permissions.module';
-import { UserAppRolesModule } from 'src/apis/user-app-roles/user-app-roles.module';import { MarketplaceAccountsModule } from 'src/apis/marketplace-accounts/marketplace-accounts.module';import { CredentialsModule } from 'src/apis/credentials/credentials.module';
-
-
-
+import { Module } from "@nestjs/common";
+import { SharedModule } from "./shared/shared.module";
+import { CronModule } from "src/common/cron/cron.module";
+import { BrandsModule } from "src/apis/brands/brands.module";
+import { CategoriesModule } from "src/apis/categories/categories.module";
+import { SubCategoriesModule } from "./sub-categories/sub-categories.module";
+import { AddressModule } from "./address/address.module";
+import { CartModule } from "./cart/cart.module";
+import { CartDetailsModule } from "./cart-details/cart-details.module";
+import { ColorModule } from "./color/color.module";
+import { CommentsModule } from "./comments/comments.module";
+import { FileUploadModule } from "./file-upload/file-upload.module";
+import { OrderModule } from "./order/order.module";
+import { PaymentGatewayModule } from "./payment-gateway/payment-gateway.module";
+import { ProductVarientsModule } from "./product-varients/product-varients.module";
+import { ProgressModule } from "./progress/progress.module";
+import { TransactionModule } from "./transaction/transaction.module";
+import { WishlistModule } from "./wishlist/wishlist.module";
+import { WishlistDetailsModule } from "./wishlist-details/wishlist-details.module";
+import { ProductModule } from "./product/product.module";
 
 @Module({
-    imports: [
-        SharedModule,
-        CronModule
-    , ApplicationsModule, OrganizationsModule, OrganizationAddressesModule, OrganizationUsersModule, BrandsModule, CategoriesModule, AppPermissionsModule, AppRolePermissionsModule, AppRolesModule, UserAppRolePermissionsModule, UserAppRolesModule, MarketplaceAccountsModule, CredentialsModule],
-    providers: [],
-    exports: []
+  imports: [
+    SharedModule,
+    CronModule,
+    BrandsModule,
+    CategoriesModule,
+    SubCategoriesModule,
+    ProductModule,
+    AddressModule,
+    CartModule,
+    CartDetailsModule,
+    ColorModule,
+    CommentsModule,
+    FileUploadModule,
+    OrderModule,
+    PaymentGatewayModule,
+    ProductVarientsModule,
+    ProgressModule,
+    TransactionModule,
+    WishlistModule,
+    WishlistDetailsModule
+  ],
+  providers: [],
+  exports: [],
 })
-export class ApisModule {
-}
+export class ApisModule {}

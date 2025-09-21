@@ -1,11 +1,11 @@
-export type CanExportResponseType = 'excel' | 'csv' | 'pdf';
+export type CanExportResponseType = "excel" | "csv" | "pdf";
 export type CanExportResponseOption = {
   data?: CanExportResponseData[];
   keys?: CanExportResponseKey[];
   dataKey?: string;
   additionalKeysForDataKey?: string[];
   exportAll?: boolean;
-  headerDisplayType?: 'uppercase' | 'propercase' | 'lowercase';
+  headerDisplayType?: "uppercase" | "propercase" | "lowercase";
   dateFormat?: string;
 };
 export interface CanExportResponseData {

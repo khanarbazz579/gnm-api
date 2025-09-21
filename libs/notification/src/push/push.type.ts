@@ -1,5 +1,5 @@
-import { ServiceAccount } from 'firebase-admin';
-import * as admin from 'firebase-admin';
+import { ServiceAccount } from "firebase-admin";
+import * as admin from "firebase-admin";
 
 export interface CanPushNotificationOptions {
   android?: {

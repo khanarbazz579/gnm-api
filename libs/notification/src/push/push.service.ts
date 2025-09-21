@@ -1,11 +1,11 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { CAN_PUSH_NOTIFICATION_OPTIONS } from './push.constant';
+import { Inject, Injectable } from "@nestjs/common";
+import { CAN_PUSH_NOTIFICATION_OPTIONS } from "./push.constant";
 import {
   CanPushNotificationOptions,
   CanPushNotificationMessagingDevicesResponse,
   CanFirebasePushNotificationOptions,
-} from './push.type';
-import * as firebaseAdmin from 'firebase-admin';
+} from "./push.type";
+import * as firebaseAdmin from "firebase-admin";
 
 @Injectable()
 export class CanPushNotificationService {
@@ -43,7 +43,7 @@ export class CanPushNotificationService {
 
     if (!this.isAndroid && !this.isIos) {
       throw new Error(
-        'Android or iOS configuration is required in order to initialize firebase notification module!',
+        "Android or iOS configuration is required in order to initialize firebase notification module!",
       );
     }
   }
@@ -54,7 +54,7 @@ export class CanPushNotificationService {
     try {
       if (!options.android && !options.ios) {
         throw new Error(
-          'Android or iOS configuration is required in order to send push notification!',
+          "Android or iOS configuration is required in order to send push notification!",
         );
       }
       const response: CanPushNotificationMessagingDevicesResponse[] = [];

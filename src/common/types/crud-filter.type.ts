@@ -1,4 +1,4 @@
-import { FindOptions, CountOptions } from 'sequelize';
+import { FindOptions, CountOptions } from "sequelize";
 
 export interface ICanCrudFilter {
   filter: FindOptions;
