@@ -11,7 +11,7 @@ import { User } from "src/core/user/user.model";
 // import * as uniqid from 'uniqid';
 import { Address } from "../address/address.model";
 import { Cart } from "../cart/cart.model";
-import { PaymentGateway } from "../payment-gateway/payment-gateway.model";
+// import { PaymentGateway } from "../payment-gateway/payment-gateway.model";
 
 @Table({ tableName: "orders" })
 export class Order extends Model<Order> {
@@ -128,16 +128,16 @@ export class Order extends Model<Order> {
   @BelongsTo(() => User, "representativeId")
   representative: User;
 
-  @ForeignKey(() => PaymentGateway)
-  @Column({
-    type: DataType.INTEGER,
-    field: "payment_gateway_id",
-    allowNull: true,
-  })
-  paymentGatewayId: number;
+  // @ForeignKey(() => PaymentGateway)
+  // @Column({
+  //   type: DataType.INTEGER,
+  //   field: "payment_gateway_id",
+  //   allowNull: true,
+  // })
+  // paymentGatewayId: number;
 
-  @BelongsTo(() => PaymentGateway, "paymentGatewayId")
-  paymentGateway: PaymentGateway;
+  // @BelongsTo(() => PaymentGateway, "paymentGatewayId")
+  // paymentGateway: PaymentGateway;
 
   @ForeignKey(() => User)
   @Column({

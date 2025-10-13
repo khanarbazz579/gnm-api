@@ -11,10 +11,8 @@ import { ColorModule } from "./color/color.module";
 import { CommentsModule } from "./comments/comments.module";
 import { FileUploadModule } from "./file-upload/file-upload.module";
 import { OrderModule } from "./order/order.module";
-import { PaymentGatewayModule } from "./payment-gateway/payment-gateway.module";
 import { ProductVarientsModule } from "./product-varients/product-varients.module";
 import { ProgressModule } from "./progress/progress.module";
-import { TransactionModule } from "./transaction/transaction.module";
 import { WishlistModule } from "./wishlist/wishlist.module";
 import { WishlistDetailsModule } from "./wishlist-details/wishlist-details.module";
 import { ProductModule } from "./product/product.module";
@@ -34,10 +32,10 @@ import { ProductModule } from "./product/product.module";
     CommentsModule,
     FileUploadModule,
     OrderModule,
-    PaymentGatewayModule,
+    // PaymentGatewayModule,
     ProductVarientsModule,
     ProgressModule,
-    TransactionModule,
+    // TransactionModule,
     WishlistModule,
     WishlistDetailsModule,
   ],
